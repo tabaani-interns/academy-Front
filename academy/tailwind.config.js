@@ -7,20 +7,51 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       fontSize: {
-        h1: ["36px", "auto"],
-        h2: ["31px", "auto"],
-        h3: ["25px", "auto"],
-        h4: ["20px", "auto"],
-        h5: ["16px", "auto"],
-        h6: ["13px", "auto"],
-        subtitle: ["16px", "24px"],
-        subtitle2: ["14px", "24px"],
-        body: ["16px", "24px"],
-        body2: ["14px", "20px"],
-        button: ["14px", "20px"],
-        input: ["12px", "auto"],
-        overline: ["10px", "16px"],
+        // Headlines
+        h1: ["36px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        h2: ["31px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        h3: ["25px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        h4: ["20px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        h5: ["16px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        h6: ["13px", { lineHeight: "auto", fontFamily: "Roboto" }],
+        // Subtitles
+        subtitle: [
+          "16px",
+          { lineHeight: "24px", fontFamily: "Roboto", fontWeight: "400" },
+        ],
+        subtitle2: [
+          "14px",
+          { lineHeight: "24px", fontFamily: "Roboto", fontWeight: "500" },
+        ],
+        // Body text
+        body: [
+          "16px",
+          { lineHeight: "24px", fontFamily: "Roboto", fontWeight: "400" },
+        ],
+        body2: [
+          "14px",
+          { lineHeight: "20px", fontFamily: "Roboto", fontWeight: "400" },
+        ],
+        // Button
+        button: [
+          "14px",
+          { lineHeight: "20px", fontFamily: "Roboto", fontWeight: "500" },
+        ],
+        // Input
+        input: [
+          "12px",
+          { lineHeight: "auto", fontFamily: "Roboto", fontWeight: "400" },
+        ],
+        // Overline
+        overline: [
+          "10px",
+          { lineHeight: "16px", fontFamily: "Roboto", fontWeight: "400" },
+        ],
+        // Legacy paragraph styles
         paragraph: ["14px", "30px"],
         largeParagraph: ["18px", "34px"],
       },
