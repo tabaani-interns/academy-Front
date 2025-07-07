@@ -98,7 +98,7 @@ module.exports = {
         },
         stroke: "#E0E0E0",
         background: "#FFFFFF",
-        gradient: "#FF8F00",
+        gradient: "linear-gradient(270deg, #FE8900 0%, #FADCC1 94%)",
         "gradient-secondary": "#00E676",
         green: "#00C853",
         lightGreen: "#B9F6CA",
@@ -106,6 +106,9 @@ module.exports = {
         lightRed: "#FF8A80",
         blue: "#2962FF",
         lightBlue: "#82B1FF",
+      },
+      backgroundImage: {
+        "gradient-text": "linear-gradient(270deg, #FE8900 0%, #FADCC1 94%)",
       },
     },
   },
