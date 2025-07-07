@@ -13,21 +13,25 @@ export default function LargeHero() {
 
       <div className="relative z-10 h-full flex">
         {/* Left content - iPad image taking full 50% */}
-        <div className="w-1/2 flex items-center justify-center px-8">
+        <div className="w-1/2 flex items-center justify-center px-8 relative z-20">
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src="/assets/images/brand/ipad.png"
               alt="Academy Learning Platform on iPad"
-              width={600}
-              height={450}
-              className="w-full h-auto max-h-[600px] object-contain"
+              width={800}
+              height={600}
+              className="w-full h-auto max-h-[700px] object-contain"
+              style={{
+                transform: "rotate(-8deg) scale(1.3)",
+                transformOrigin: "center center",
+              }}
               priority
             />
           </div>
         </div>
 
         {/* Right content - Text 50% */}
-        <div className="w-1/2 flex items-center justify-center px-8">
+        <div className="w-1/2 flex items-center justify-center px-8 relative z-10">
           <div className="text-left space-y-8">
             <div className="space-y-6">
               <h1
