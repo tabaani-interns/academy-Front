@@ -28,18 +28,39 @@ export default function LargeHero() {
 
         {/* Right content - Text 50% */}
         <div className="w-1/2 flex items-center justify-center px-8">
-          <div className="text-center space-y-8">
+          <div className="text-left space-y-8">
             <div className="space-y-6">
-              <h1 className="text-h1 font-bold text-black leading-tight">
-                🙌 Hello friends
+              <h1
+                className="text-black capitalize"
+                style={{
+                  fontFamily: "Roboto",
+                  fontWeight: 900,
+                  fontStyle: "normal",
+                  fontSize: "40px",
+                  lineHeight: "68px",
+                  letterSpacing: "0px",
+                  textAlign: "left",
+                }}
+              >
+                🙌 Hello friends we are tabaani academy and we want to start a
+                HOSTING course together. Do you like it too 😍 ?
               </h1>
-              <p className="text-body text-black-75 max-w-lg mx-auto">
-                we are tabaani academy and we want to start a HOSTING course
-                together. Do you like it too 😍 ?
-              </p>
             </div>
 
-            <button className="bg-primary hover:bg-primary-75 text-white px-8 py-4 rounded-lg text-button font-medium transition-colors duration-200 shadow-lg">
+            <button
+              className="bg-dark hover:bg-dark-75 text-white transition-colors duration-200"
+              style={{
+                width: "183px",
+                height: "60px",
+                borderRadius: "10px",
+                opacity: 1,
+                gap: "8px",
+                paddingTop: "20px",
+                paddingRight: "20px",
+                paddingBottom: "20px",
+                paddingLeft: "24px",
+              }}
+            >
               Start New Course
             </button>
           </div>
