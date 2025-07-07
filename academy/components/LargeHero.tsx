@@ -46,8 +46,23 @@ export default function LargeHero() {
                   textAlign: "left",
                 }}
               >
-                🙌 Hello friends we are tabaani academy and we want to start a
-                HOSTING course together. Do you like it too 😍 ?
+                🙌 Hello friends we are{" "}
+                <span className="text-primary">tabaani</span> academy and we
+                want to start a{" "}
+                <span
+                  className="font-black"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FE8900 0%, #FADCC1 94%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    display: "inline-block",
+                  }}
+                >
+                  HOSTING
+                </span>{" "}
+                course together. Do you like it too 😍 ?
               </h1>
             </div>
 
