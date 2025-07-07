@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -10,6 +11,77 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Custom Font Sizes */
+  --font-size-h1: 36px;
+  --font-size-h2: 31px;
+  --font-size-h3: 25px;
+  --font-size-h4: 20px;
+  --font-size-h5: 16px;
+  --font-size-h6: 13px;
+  --font-size-subtitle: 16px;
+  --line-height-subtitle: 24px;
+  --font-size-subtitle2: 14px;
+  --line-height-subtitle2: 24px;
+  --font-size-body: 16px;
+  --line-height-body: 24px;
+  --font-size-body2: 14px;
+  --line-height-body2: 20px;
+  --font-size-button: 14px;
+  --line-height-button: 20px;
+  --font-size-input: 12px;
+  --font-size-overline: 10px;
+  --line-height-overline: 16px;
+  --font-size-paragraph: 14px;
+  --line-height-paragraph: 30px;
+  --font-size-largeParagraph: 18px;
+  --line-height-largeParagraph: 34px;
+
+  /* Custom Colors */
+  --color-primary: #ffaf20;
+  --color-primary-75: #ffc243;
+  --color-primary-50: #ffd670;
+  --color-primary-25: #ffe7a1;
+  --color-primary-10: #fff2c4;
+  --color-primary-5: #fff9e7;
+
+  --color-secondary: #f79646;
+  --color-secondary-75: #f9a45f;
+  --color-secondary-50: #fab47f;
+  --color-secondary-25: #fcd4b1;
+  --color-secondary-10: #fee9d5;
+  --color-secondary-5: #fff6ef;
+
+  --color-black: #3e3232;
+  --color-black-75: #5c4c4c;
+  --color-black-50: #817575;
+  --color-black-25: #aaa1a1;
+  --color-black-10: #d4d0d0;
+  --color-black-5: #eceaea;
+
+  --color-white: #ffffff;
+  --color-white-75: #e4e4e4;
+  --color-white-50: #c9c9c9;
+  --color-white-25: #aeaeae;
+  --color-white-10: #939393;
+  --color-white-5: #787878;
+
+  --color-dark: #080808;
+  --color-dark-75: #1c1c1c;
+  --color-dark-50: #404040;
+  --color-dark-25: #666666;
+  --color-dark-10: #a3a3a3;
+  --color-dark-5: #c7c7c7;
+
+  --color-stroke: #e0e0e0;
+  --color-gradient: #ff8f00;
+  --color-gradient-secondary: #00e676;
+  --color-green: #00c853;
+  --color-lightGreen: #b9f6ca;
+  --color-red: #d50000;
+  --color-lightRed: #ff8a80;
+  --color-blue: #2962ff;
+  --color-lightBlue: #82b1ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +94,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
