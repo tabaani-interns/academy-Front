@@ -1,9 +1,8 @@
+"useClient"
 import LargeHero from "@/components/LargeHero";
 import SearchPanel from "@/components/SearchPanel";
-
-import NewCourse from "@/components/NewCourse";
-import courses from "@/lib/courses";
-import CoursCard from "@/components/CourseCard";
+import NewCourses from "@/components/NewCourses";
+import TopCourses from "@/components/TopCourses";
 
 
 
@@ -12,8 +11,9 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <LargeHero />
 
-      <SearchPanel />
-     <NewCourse />
+        <SearchPanel />
+        <NewCourses />
+        <TopCourses />
 
 
 

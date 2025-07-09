@@ -1,4 +1,4 @@
-// components/NewCourse.tsx
+
 "use client";
 
 import { Filter } from "lucide-react";
@@ -107,7 +107,7 @@ const courses: CourseWithCategory[] = [
 ];
 
 
-const NewCourse = () => {
+const NewCourses = () => {
     const [selectedCategory, setSelectedCategory] = useState("All Course");
     const [activeCategory, setActiveCategory] = useState("All Course");
 
@@ -188,7 +188,7 @@ const NewCourse = () => {
                             No courses match the selected filter criteria.
                         </p>
                         <button
-                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                            className="px-4 py-2 bg-gray-900 text-gray-400  rounded-lg hover:bg-yellow-100"
                             onClick={() => {
                                 setSelectedCategory("All Course");
                                 setActiveCategory("All Course");
@@ -202,4 +202,4 @@ const NewCourse = () => {
         </section>
     );
 };
-export default NewCourse;
+export default NewCourses;

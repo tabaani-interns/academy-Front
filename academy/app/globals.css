@@ -83,7 +83,13 @@
   --color-blue: #2962ff;
   --color-lightBlue: #82b1ff;
 }
-
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
