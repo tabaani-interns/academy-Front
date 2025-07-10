@@ -129,7 +129,7 @@ const NewCourses = () => {
             {/* Filter Navigation */}
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
                 <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-yellow-400" />
+                    <span className="w-2 h-2 rounded-full bg-yellow-500" />
                     <h4 className="text-xl font-semibold text-gray-900 font-roboto">NEW COURSES</h4>
                 </div>
 
@@ -140,11 +140,11 @@ const NewCourses = () => {
                             className={`px-4 py-2 rounded-xl text-black whitespace-nowrap transition-all ${
                                 selectedCategory === category
                                     ? "bg-gray-100 shadow font-medium font-semibold "
-                                    : "text-gray-700 hover:bg-gray-100"
+                                    : "text-gray-700 "
                             }`}
                             onClick={() => handleCategorySelect(category)}
                         >
-                            {category}
+                           <p className="hover:text-yellow-500">{category}</p>
                         </button>
                     ))}
 
@@ -154,8 +154,8 @@ const NewCourses = () => {
                         onClick={applyFilter}
                         className={`group p-2 rounded-xl shadow-sm transition-colors
               ${isActive
-                            ? 'bg-gray-200 text-white hover:bg-yellow-200'
-                            : 'bg-yellow-200 text-gray-700 hover:bg-gray-900'}`}
+                            ? 'bg-gray-200 text-white hover:bg-yellow-500'
+                            : 'bg-yellow-500 text-gray-700 hover:bg-gray-900'}`}
                     >
                         <Filter
                             className={`w-5 h-5 transition-colors
@@ -188,7 +188,7 @@ const NewCourses = () => {
                             No courses match the selected filter criteria.
                         </p>
                         <button
-                            className="px-4 py-2 bg-gray-900 text-gray-400  rounded-lg hover:bg-yellow-100"
+                            className="px-4 py-2 bg-gray-900 text-gray-400  rounded-lg hover:bg-yellow-500"
                             onClick={() => {
                                 setSelectedCategory("All Course");
                                 setActiveCategory("All Course");

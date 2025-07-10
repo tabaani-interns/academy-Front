@@ -1,3 +1,5 @@
+import NewsLetter from "@/components/NewsLetter";
+
 "useClient"
 import LargeHero from "@/components/LargeHero";
 import SearchPanel from "@/components/SearchPanel";
@@ -14,6 +16,7 @@ export default function Home() {
         <SearchPanel />
         <NewCourses />
         <TopCourses />
+      <NewsLetter/>
 
 
 

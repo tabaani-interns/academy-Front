@@ -51,7 +51,7 @@ const CourseCard =({
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-gray-800">
+                    <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
                         {startCourseText} &nbsp; &gt;
                     </button>
 

@@ -132,13 +132,13 @@ const TopCourses = () => {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => scrollByCards("left")}
-                        className="p-2 rounded-full font-medium font-semibold hover:bg-gray-100"
+                        className="p-2 rounded-xl font-medium font-semibold hover:bg-yellow-500"
                     >
                         <ChevronLeft className="w-5 h-5 text-black" />
                     </button>
                     <button
                         onClick={() => scrollByCards("right")}
-                        className="p-2 rounded-full font-medium font-semibold hover:bg-gray-100"
+                        className="p-2 rounded-xl font-medium font-semibold hover:bg-yellow-500"
                     >
                         <ChevronRight className="w-5 h-5 text-black" />
                     </button>
