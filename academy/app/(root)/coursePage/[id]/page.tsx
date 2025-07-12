@@ -2,6 +2,7 @@
 
 import React from 'react'
 import {FaqSectionWithCategories} from "@/components/faq-with-categories";
+import HowItWorks from "@/components/HowItWorks";
 const DEMO_FAQS = [
     {
         question: "How do I get started?",
@@ -29,6 +30,7 @@ const DEMO_FAQS = [
 const Page = () => {
     return (
         <>
+            <HowItWorks/>
             <FaqSectionWithCategories
                 title="FAQs"
                 description=""

@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Tabaani Academy",
   description: "E-learning application",
+
 };
 
 export default function RootLayout({
