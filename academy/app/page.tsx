@@ -11,12 +11,11 @@ import TopCourses from "@/components/TopCourses";
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
-      <LargeHero />
-
+        <LargeHero />
         <SearchPanel />
         <NewCourses />
         <TopCourses />
-      <NewsLetter/>
+        <NewsLetter/>
 
 
 
