@@ -1,4 +1,5 @@
 import LargeHero from "@/components/LargeHero";
+import ModulesSection from "@/components/ModulesSection";
 import SearchPanel from "@/components/SearchPanel";
 
 export default function Home() {
@@ -18,6 +19,8 @@ export default function Home() {
             Experience the difference with our innovative learning platform
           </p>
         </div>
+        <ModulesSection />
+
       </main>
     </div>
   );
