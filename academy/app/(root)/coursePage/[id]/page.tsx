@@ -5,6 +5,7 @@ import {FaqSectionWithCategories} from "@/components/faq-with-categories";
 import HowItWorks from "@/components/HowItWorks";
 import CourseDetails from "@/components/CourseDetails";
 import CourseCover from "@/components/CourseCover";
+import CourseSkills from "@/components/CourseSkills";
 
 const DEMO_FAQS = [
     {
@@ -36,6 +37,7 @@ const Page = () => {
             <CourseCover/>
             <CourseDetails />
             <HowItWorks/>
+            <CourseSkills/>
             <FaqSectionWithCategories
                 title="FAQs"
                 description=""
