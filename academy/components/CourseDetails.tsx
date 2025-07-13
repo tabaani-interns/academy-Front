@@ -26,10 +26,10 @@ const CourseDetails = () => {
 
         <section className="container mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row w-full gap-4">
-                {/* Div1 */}
+
                 <div className="flex flex-col md:flex-1 gap-4">
                     <div className="flex flex-col md:flex-row gap-4">
-                        {/* SubDiv1 */}
+
                         <div className="flex-1 bg-white p-4 start-0">
                             <span className="text-2xl text-black mb-4 block">Course Detail</span>
                             <div className="mt-2 space-y-2">
@@ -53,7 +53,7 @@ const CourseDetails = () => {
                             </div>
 
                         </div>
-                        {/* SubDiv2 */}
+
                         <div className="flex-1 bg-white p-4 start-0">
                             <span className="text-2xl text-black mb-4 block">Course Features</span>
                             <div className="mt-2 space-y-2">
@@ -71,7 +71,7 @@ const CourseDetails = () => {
                     </div>
                 </div>
 
-                {/* Div2 */}
+
                 <div className="flex-1 bg-white p-4 start-0">
                     <span className="text-2xl text-black mb-4 block">About this course</span>
                     <div>

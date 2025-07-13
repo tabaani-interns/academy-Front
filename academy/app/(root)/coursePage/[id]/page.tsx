@@ -4,6 +4,7 @@ import React from 'react'
 import {FaqSectionWithCategories} from "@/components/faq-with-categories";
 import HowItWorks from "@/components/HowItWorks";
 import CourseDetails from "@/components/CourseDetails";
+import CourseCover from "@/components/CourseCover";
 
 const DEMO_FAQS = [
     {
@@ -32,6 +33,7 @@ const DEMO_FAQS = [
 const Page = () => {
     return (
         <>
+            <CourseCover/>
             <CourseDetails />
             <HowItWorks/>
             <FaqSectionWithCategories
