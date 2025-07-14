@@ -2,6 +2,7 @@ import NewsLetter from "@/components/NewsLetter";
 
 "useClient"
 import LargeHero from "@/components/LargeHero";
+import ModulesSection from "@/components/ModulesSection";
 import SearchPanel from "@/components/SearchPanel";
 import NewCourses from "@/components/NewCourses";
 import TopCourses from "@/components/TopCourses";
@@ -29,6 +30,8 @@ export default function Home() {
             Experience the difference with our innovative learning platform
           </p>
         </div>
+        <ModulesSection />
+
       </main>
     </div>
   );
