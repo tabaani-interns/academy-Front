@@ -15,8 +15,8 @@ const Footer = () => {
           <Image
             src="/assets/images/brand/TabaaniLogo.png"
             alt="Logo Top"
-            width={64}
-            height={64}
+            width={160}
+            height={100}
             className="w-12 md:w-16"
           />
           <Image
