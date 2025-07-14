@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import CourseDetails from "@/components/CourseDetails";
 import CourseCover from "@/components/CourseCover";
 import CourseSkills from "@/components/CourseSkills";
+import ModulesSection from '@/components/ModulesSection';
 
 const DEMO_FAQS = [
     {
@@ -37,6 +38,7 @@ const Page = () => {
             <CourseCover/>
             <CourseDetails />
             <HowItWorks/>
+            <ModulesSection/>
             <CourseSkills/>
             <FaqSectionWithCategories
                 title="FAQs"
