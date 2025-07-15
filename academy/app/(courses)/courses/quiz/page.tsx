@@ -9,6 +9,31 @@ export default function QuizPage() {
     console.log(`${quizType} Quiz: ${isCorrect ? "Correct" : "Incorrect"}`);
   };
 
+  const handleQuizComplete = (results: boolean[]) => {
+    console.log("True/False Quiz Complete:", results);
+    const correctCount = results.filter(Boolean).length;
+    console.log(`Score: ${correctCount}/${results.length}`);
+  };
+
+  // Stack of True/False questions
+  const trueFalseQuestions = [
+    {
+      question:
+        "Lorem Ipsum Dolor Sit Amet Consectetur. Odio Auctor Tincidunt Pellentesque Sapien Sed Mauris A. Amet Mauris Tellus Eu Leo Habitant Malesuada Egestas?",
+      correctAnswer: false,
+    },
+    {
+      question:
+        "Next.js is a React framework that enables server-side rendering and static site generation out of the box?",
+      correctAnswer: true,
+    },
+    {
+      question:
+        "TypeScript is a superset of JavaScript that adds static type definitions to help catch errors during development?",
+      correctAnswer: true,
+    },
+  ];
+
   const multipleChoiceOptions = [
     {
       text: "Lorem Ipsum Dolor Sit Amet Consectetur. A Odio Non Tortor Maecenas Purus Tellus Odio Massa Tincidunt.",
@@ -56,15 +81,14 @@ export default function QuizPage() {
         </div>
 
         <div className="space-y-16">
-          {/* True/False Quiz */}
+          {/* True/False Quiz - Swipeable Stack */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-              True/False Quiz
+              Swipeable True/False Quiz
             </h2>
             <TrueFalseQuiz
-              question="Lorem Ipsum Dolor Sit Amet Consectetur. Odio Auctor Tincidunt Pellentesque Sapien Sed Mauris A. Amet Mauris Tellus Eu Leo Habitant Malesuada Egestas. Tellus Nibh Sed Eu Lobortis Scelerisque?"
-              correctAnswer={false}
-              onAnswer={handleAnswer("True/False")}
+              questions={trueFalseQuestions}
+              onQuizComplete={handleQuizComplete}
             />
           </div>
 

@@ -1,93 +1,211 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-interface TrueFalseQuizProps {
+interface TrueFalseQuestion {
   readonly question: string;
   readonly correctAnswer: boolean;
+}
+
+interface TrueFalseQuizProps {
+  readonly questions?: readonly TrueFalseQuestion[];
+  readonly question?: string;
+  readonly correctAnswer?: boolean;
   readonly onAnswer?: (isCorrect: boolean) => void;
+  readonly onQuizComplete?: (results: boolean[]) => void;
 }
 
 export default function TrueFalseQuiz({
+  questions,
   question,
   correctAnswer,
   onAnswer,
+  onQuizComplete,
 }: TrueFalseQuizProps) {
-  const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
-  const [showResult, setShowResult] = useState(false);
+  // Handle both single question and multiple questions
+  const quizQuestions =
+    questions ||
+    (question && correctAnswer !== undefined
+      ? [{ question, correctAnswer }]
+      : []);
 
-  const handleAnswer = (answer: boolean) => {
-    setSelectedAnswer(answer);
-    setShowResult(true);
-    const isCorrect = answer === correctAnswer;
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [results, setResults] = useState<boolean[]>([]);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
+    null
+  );
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const currentQuestion = quizQuestions[currentQuestionIndex];
+  const isQuizComplete = currentQuestionIndex >= quizQuestions.length;
+
+  const handleSwipe = (answer: boolean) => {
+    if (isAnimating || isQuizComplete) return;
+
+    setIsAnimating(true);
+    setSwipeDirection(answer ? "right" : "left");
+
+    const isCorrect = answer === currentQuestion.correctAnswer;
+    const newResults = [...results, isCorrect];
+    setResults(newResults);
+
+    // Call onAnswer for single question compatibility
     onAnswer?.(isCorrect);
+
+    setTimeout(() => {
+      if (currentQuestionIndex + 1 >= quizQuestions.length) {
+        // Quiz completed
+        onQuizComplete?.(newResults);
+      } else {
+        // Move to next question
+        setCurrentQuestionIndex((prev) => prev + 1);
+      }
+      setIsAnimating(false);
+      setSwipeDirection(null);
+    }, 600);
   };
 
   const resetQuiz = () => {
-    setSelectedAnswer(null);
-    setShowResult(false);
+    setCurrentQuestionIndex(0);
+    setResults([]);
+    setIsAnimating(false);
+    setSwipeDirection(null);
   };
 
-  const getTrueButtonClass = () => {
-    if (selectedAnswer === true) {
-      return correctAnswer === true ? "bg-green-500" : "bg-red-500";
+  const getCardTransform = (index: number) => {
+    const offset = index - currentQuestionIndex;
+
+    if (offset < 0) return "translateX(-100%) scale(0.8)";
+    if (offset === 0) {
+      if (swipeDirection === "left")
+        return "translateX(-120%) rotate(-15deg) scale(0.9)";
+      if (swipeDirection === "right")
+        return "translateX(120%) rotate(15deg) scale(0.9)";
+      return "translateX(0) scale(1)";
     }
-    return "bg-gray-400";
+
+    return `translateY(-${offset * 8}px) scale(${1 - offset * 0.05}) translateZ(${-offset * 10}px)`;
   };
 
-  const getFalseButtonClass = () => {
-    if (selectedAnswer === false) {
-      return correctAnswer === false ? "bg-green-500" : "bg-red-500";
-    }
-    return "bg-gray-400";
+  const getCardOpacity = (index: number) => {
+    const offset = index - currentQuestionIndex;
+    if (offset < 0) return 0;
+    if (offset === 0) return swipeDirection ? 0.7 : 1;
+    return Math.max(0.3, 1 - offset * 0.2);
   };
+
+  const getCardZIndex = (index: number) => {
+    return quizQuestions.length - Math.abs(index - currentQuestionIndex);
+  };
+
+  if (isQuizComplete) {
+    const correctCount = results.filter(Boolean).length;
+    const percentage = Math.round((correctCount / results.length) * 100);
+
+    return (
+      <div className="bg-white rounded-2xl p-8 max-w-md mx-auto border border-gray-200 text-center">
+        <div className="mb-6">
+          <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full flex items-center justify-center">
+            <span className="text-white text-2xl font-bold">{percentage}%</span>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-2">
+            Quiz Complete!
+          </h3>
+          <p className="text-gray-600">
+            You got {correctCount} out of {results.length} questions correct
+          </p>
+        </div>
+
+        <div className="mb-6">
+          {results.map((isCorrect, index) => (
+            <div key={index} className="flex items-center justify-between py-2">
+              <span className="text-gray-700">Question {index + 1}</span>
+              <span
+                className={`font-medium ${isCorrect ? "text-green-600" : "text-red-600"}`}
+              >
+                {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={resetQuiz}
+          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-gray-100 rounded-2xl p-8 max-w-2xl mx-auto">
-      <div className="text-center mb-8">
-        <p className="text-gray-800 text-lg leading-relaxed">{question}</p>
-      </div>
-
-      <div className="flex justify-center gap-4 mb-6">
-        <button
-          onClick={() => handleAnswer(true)}
-          disabled={showResult}
-          className={`px-8 py-3 rounded-lg font-medium text-white transition-all duration-200 ${
-            showResult ? getTrueButtonClass() : "bg-gray-500 hover:bg-gray-600"
-          }`}
-        >
-          TRUE
-        </button>
-        <button
-          onClick={() => handleAnswer(false)}
-          disabled={showResult}
-          className={`px-8 py-3 rounded-lg font-medium text-white transition-all duration-200 ${
-            showResult ? getFalseButtonClass() : "bg-teal-600 hover:bg-teal-700"
-          }`}
-        >
-          FALSE
-        </button>
-      </div>
-
-      {showResult && (
-        <div className="text-center">
-          <p
-            className={`text-lg font-medium mb-4 ${
-              selectedAnswer === correctAnswer
-                ? "text-green-600"
-                : "text-red-600"
-            }`}
-          >
-            {selectedAnswer === correctAnswer ? "Correct!" : "Incorrect!"}
-          </p>
-          <button
-            onClick={resetQuiz}
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            Try Again
-          </button>
+    <div className="relative max-w-md mx-auto h-96">
+      {/* Progress indicator */}
+      <div className="mb-6">
+        <div className="flex justify-center mb-2">
+          <span className="text-sm text-gray-600">
+            {currentQuestionIndex + 1} of {quizQuestions.length}
+          </span>
         </div>
-      )}
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div
+            className="bg-teal-500 h-2 rounded-full transition-all duration-300"
+            style={{
+              width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%`,
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Stacked cards */}
+      <div className="relative h-80">
+        {quizQuestions.map((q, index) => (
+          <div
+            key={index}
+            ref={index === currentQuestionIndex ? cardRef : null}
+            className="absolute inset-0 bg-white rounded-2xl p-8 border border-gray-200 transition-all duration-500 ease-out cursor-pointer"
+            style={{
+              transform: getCardTransform(index),
+              opacity: getCardOpacity(index),
+              zIndex: getCardZIndex(index),
+            }}
+          >
+            <div className="h-full flex flex-col justify-center">
+              <div className="text-center mb-8">
+                <p className="text-gray-800 text-lg leading-relaxed">
+                  {q.question}
+                </p>
+              </div>
+
+              {index === currentQuestionIndex && (
+                <div className="flex justify-center gap-6">
+                  <button
+                    onClick={() => handleSwipe(false)}
+                    disabled={isAnimating}
+                    className="w-16 h-16 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-xl transition-all duration-200 transform hover:scale-110 shadow-lg"
+                  >
+                    ✗
+                  </button>
+                  <button
+                    onClick={() => handleSwipe(true)}
+                    disabled={isAnimating}
+                    className="w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl transition-all duration-200 transform hover:scale-110 shadow-lg"
+                  >
+                    ✓
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Instructions */}
+      <div className="text-center mt-6">
+        <p className="text-sm text-gray-500">Tap ✓ for True or ✗ for False</p>
+      </div>
     </div>
   );
 }
