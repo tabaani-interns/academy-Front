@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function CoursesLayout({
   children,
@@ -13,7 +14,7 @@ export default function CoursesLayout({
     <div className="min-h-screen bg-black text-white flex">
       {/* Sidebar */}
       <div
-        className={`${isCollapsed ? "w-16" : "w-64"} bg-gray-900 border-r border-gray-800 fixed h-full transition-all duration-300 ease-in-out`}
+        className={`${isCollapsed ? "w-[100px]" : "w-[350px]"} bg-gray-900 border-r border-gray-800 fixed h-full transition-all duration-300 ease-in-out`}
       >
         {/* Logo section */}
         <div className="p-6 border-b border-gray-800 relative">
@@ -50,7 +51,7 @@ export default function CoursesLayout({
         </div>
 
         {/* Navigation menu */}
-        <nav className="p-4">
+        <nav className="p-4 pb-[200px]">
           <ul className="space-y-2">
             <li>
               <a
@@ -159,27 +160,45 @@ export default function CoursesLayout({
           </ul>
         </nav>
 
-        {/* User section at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
-          <div
-            className={`flex items-center ${isCollapsed ? "justify-center" : "space-x-3"} transition-all duration-300`}
-          >
-            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-sm">U</span>
+        {/* Support section at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          {!isCollapsed ? (
+            // Full support image as button when expanded
+            <button className="w-full hover:scale-105 transition-transform duration-200">
+              <Image
+                src="/assets/svgs/support.svg"
+                alt="Support 24/7"
+                width={320}
+                height={200}
+                className="w-full h-auto object-contain max-h-[200px]"
+              />
+            </button>
+          ) : (
+            // Help icon when collapsed
+            <div className="flex justify-center">
+              <button className="w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-75 transition-colors">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </button>
             </div>
-            {!isCollapsed && (
-              <div className="transition-opacity duration-300">
-                <p className="text-white text-sm font-medium">Student</p>
-                <p className="text-gray-400 text-xs">user@example.com</p>
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
 
       {/* Main content area */}
       <div
-        className={`flex-1 ${isCollapsed ? "ml-16" : "ml-64"} transition-all duration-300 ease-in-out`}
+        className={`flex-1 ${isCollapsed ? "ml-[100px]" : "ml-[350px]"} transition-all duration-300 ease-in-out`}
       >
         <main className="p-8">{children}</main>
       </div>
