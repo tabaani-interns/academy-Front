@@ -1,30 +1,52 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Courses - Tabaani Academy",
-  description: "Browse and manage your courses",
-};
+import { useState } from "react";
 
 export default function CoursesLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <div className="min-h-screen bg-black text-white flex">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-900 border-r border-gray-800 fixed h-full">
+      <div
+        className={`${isCollapsed ? "w-16" : "w-64"} bg-gray-900 border-r border-gray-800 fixed h-full transition-all duration-300 ease-in-out`}
+      >
         {/* Logo section */}
-        <div className="p-6 border-b border-gray-800">
+        <div className="p-6 border-b border-gray-800 relative">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">T</span>
             </div>
-            <div>
-              <h1 className="text-white font-semibold text-lg">Tabaani</h1>
-              <p className="text-gray-400 text-sm">Academy</p>
-            </div>
+            {!isCollapsed && (
+              <div className="transition-opacity duration-300">
+                <h1 className="text-white font-semibold text-lg">Tabaani</h1>
+                <p className="text-gray-400 text-sm">Academy</p>
+              </div>
+            )}
           </div>
+          {/* Toggle button */}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="absolute -right-3 top-8 bg-gray-800 border border-gray-700 rounded-full w-6 h-6 flex items-center justify-center hover:bg-gray-700 transition-colors"
+          >
+            <svg
+              className={`w-3 h-3 text-gray-400 transition-transform duration-300 ${isCollapsed ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
         </div>
 
         {/* Navigation menu */}
@@ -33,34 +55,46 @@ export default function CoursesLayout({
             <li>
               <a
                 href="/courses"
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-orange-500 text-white"
+                className={`flex items-center ${isCollapsed ? "justify-center px-3" : "space-x-3 px-4"} py-3 rounded-lg bg-white text-primary-75 transition-all duration-300`}
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span>My Courses</span>
+                {!isCollapsed && (
+                  <span className="transition-opacity duration-300">
+                    My Courses
+                  </span>
+                )}
               </a>
             </li>
             <li>
-              <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors">
+              <button
+                className={`w-full flex items-center ${isCollapsed ? "justify-center px-3" : "space-x-3 px-4"} py-3 rounded-lg text-primary-75 hover:bg-gray-800 transition-all duration-300`}
+              >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
                   <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                 </svg>
-                <span>Dashboard</span>
+                {!isCollapsed && (
+                  <span className="transition-opacity duration-300">
+                    Dashboard
+                  </span>
+                )}
               </button>
             </li>
             <li>
-              <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors">
+              <button
+                className={`w-full flex items-center ${isCollapsed ? "justify-center px-3" : "space-x-3 px-4"} py-3 rounded-lg text-primary-75 hover:bg-gray-800 transition-all duration-300`}
+              >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -71,13 +105,19 @@ export default function CoursesLayout({
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Progress</span>
+                {!isCollapsed && (
+                  <span className="transition-opacity duration-300">
+                    Progress
+                  </span>
+                )}
               </button>
             </li>
             <li>
-              <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors">
+              <button
+                className={`w-full flex items-center ${isCollapsed ? "justify-center px-3" : "space-x-3 px-4"} py-3 rounded-lg text-primary-75 hover:bg-gray-800 transition-all duration-300`}
+              >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -87,13 +127,19 @@ export default function CoursesLayout({
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Profile</span>
+                {!isCollapsed && (
+                  <span className="transition-opacity duration-300">
+                    Profile
+                  </span>
+                )}
               </button>
             </li>
             <li>
-              <button className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors">
+              <button
+                className={`w-full flex items-center ${isCollapsed ? "justify-center px-3" : "space-x-3 px-4"} py-3 rounded-lg text-primary-75 hover:bg-gray-800 transition-all duration-300`}
+              >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 flex-shrink-0"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -103,7 +149,11 @@ export default function CoursesLayout({
                     clipRule="evenodd"
                   />
                 </svg>
-                <span>Settings</span>
+                {!isCollapsed && (
+                  <span className="transition-opacity duration-300">
+                    Settings
+                  </span>
+                )}
               </button>
             </li>
           </ul>
@@ -111,20 +161,26 @@ export default function CoursesLayout({
 
         {/* User section at bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+          <div
+            className={`flex items-center ${isCollapsed ? "justify-center" : "space-x-3"} transition-all duration-300`}
+          >
+            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-white text-sm">U</span>
             </div>
-            <div>
-              <p className="text-white text-sm font-medium">Student</p>
-              <p className="text-gray-400 text-xs">user@example.com</p>
-            </div>
+            {!isCollapsed && (
+              <div className="transition-opacity duration-300">
+                <p className="text-white text-sm font-medium">Student</p>
+                <p className="text-gray-400 text-xs">user@example.com</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Main content area */}
-      <div className="flex-1 ml-64">
+      <div
+        className={`flex-1 ${isCollapsed ? "ml-16" : "ml-64"} transition-all duration-300 ease-in-out`}
+      >
         <main className="p-8">{children}</main>
       </div>
     </div>
