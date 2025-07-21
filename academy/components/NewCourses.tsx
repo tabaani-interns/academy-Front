@@ -5,7 +5,7 @@ import { Filter } from "lucide-react";
 import { useState } from "react";
 import CourseCard from "./CourseCard";
 
-// Define the extended type for courses including category
+// Define the extended type for course including category
 type CourseWithCategory = {
     image: string;
     courseTitle: string;
@@ -19,7 +19,7 @@ type CourseWithCategory = {
 
 const categories = ["All Course", "Ideation", "Development", "Photography", "Management"];
 
-// Sample courses data - replace with your actual data source
+// Sample course data - replace with your actual data source
 const courses: CourseWithCategory[] = [
     {
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
@@ -103,7 +103,7 @@ const courses: CourseWithCategory[] = [
         category: "Development"
     },
 
-    // Add more courses as needed
+    // Add more course as needed
 ];
 
 

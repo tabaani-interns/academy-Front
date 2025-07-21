@@ -15,7 +15,7 @@ type CourseWithCategory = {
 };
 
 
-// Sample courses data - replace with your actual data source
+// Sample course data - replace with your actual data source
 const courses: CourseWithCategory[] = [
     {
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
