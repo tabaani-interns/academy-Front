@@ -24,6 +24,9 @@ const Page = () => {
                 imageUrl="/Instructor.png"
            />
 
+
+
+
        </>
     )
 }
