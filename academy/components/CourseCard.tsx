@@ -1,8 +1,10 @@
 // components/CourseCard.tsx
 import Image from "next/image";
 import {BookOpen, Star, Trophy, User} from "lucide-react";
+import Link from "next/link";
 
 type CourseProps = {
+    id: string;
     image: string;
     courseTitle: string;
     lessons: number;
@@ -13,6 +15,7 @@ type CourseProps = {
 };
 
 const CourseCard =({
+                                       id,
                                        image,
                                        courseTitle,
                                        lessons,
@@ -51,6 +54,7 @@ const CourseCard =({
                     </div>
                 </div>
                 <div className="flex justify-between">
+                    <Link href={`/coursePage/${id}`}></Link>
 
                     <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
                         Start Course &nbsp; &gt;
