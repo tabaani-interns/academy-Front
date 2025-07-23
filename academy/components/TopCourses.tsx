@@ -4,6 +4,7 @@ import {Filter, ChevronLeft, ChevronRight} from "lucide-react";
 import CourseCard from "@/components/CourseCard";
 
 type CourseWithCategory = {
+    id: string;
     image: string;
     courseTitle: string;
     lessons: number;
@@ -18,65 +19,94 @@ type CourseWithCategory = {
 // Sample courses data - replace with your actual data source
 const courses: CourseWithCategory[] = [
     {
+        id: "1",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
         courseTitle: "Ideation Masterclass",
         lessons: 12,
         students: 150,
         level: "Beginner",
         rating: 4,
-        startCourseText: "Start Course",
+
         category: "Ideation"
     },
     {
+        id: "2",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Advanced Ideation",
-        lessons: 15,
-        students: 300, // More students
-        level: "Advanced",
-        rating: 5,
-        startCourseText: "Start Course",
+        courseTitle: "Ideation Masterclass",
+        lessons: 12,
+        students: 150,
+        level: "Beginner",
+        rating: 4,
+
         category: "Ideation"
     },
     {
+        id: "3",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Ideation Masterclass",
+        lessons: 12,
+        students: 150,
+        level: "Beginner",
+        rating: 4,
+
+        category: "Ideation"
+    },
+    {
+        id: "4",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Ideation Masterclass",
+        lessons: 12,
+        students: 150,
+        level: "Beginner",
+        rating: 4,
+
+        category: "Ideation"
+    },
+    {
+        id: "5",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Ideation Masterclass",
+        lessons: 12,
+        students: 150,
+        level: "Beginner",
+        rating: 4,
+
+        category: "Ideation"
+    },
+
+    {
+        id: "6",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
         courseTitle: "Web Development",
         lessons: 24,
-        students: 500, // Most students
+        students: 320,
         level: "Intermediate",
         rating: 5,
-        startCourseText: "Start Course",
+
         category: "Development"
     },
     {
+        id: "7",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Advanced Photography",
-        lessons: 18,
-        students: 400,
-        level: "Advanced",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Photography"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Project Management",
-        lessons: 20,
-        students: 350,
-        level: "Beginner",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Management"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Product Management",
-        lessons: 22,
-        students: 450,
+        courseTitle: "Web Development",
+        lessons: 24,
+        students: 320,
         level: "Intermediate",
         rating: 5,
-        startCourseText: "Start Course",
-        category: "Management"
+
+        category: "Development"
     },
+    {
+        id: "8",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Web Development",
+        lessons: 24,
+        students: 320,
+        level: "Intermediate",
+        rating: 5,
+        category: "Development"
+    },
+
 ];
 
 const TopCourses = () => {

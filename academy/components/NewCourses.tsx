@@ -7,6 +7,7 @@ import CourseCard from "./CourseCard";
 
 // Define the extended type for courses including category
 type CourseWithCategory = {
+    id: string;
     image: string;
     courseTitle: string;
     lessons: number;
@@ -22,88 +23,69 @@ const categories = ["All Course", "Ideation", "Development", "Photography", "Man
 // Sample courses data - replace with your actual data source
 const courses: CourseWithCategory[] = [
     {
+        id: "1",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
         courseTitle: "Ideation Masterclass",
         lessons: 12,
         students: 150,
         level: "Beginner",
         rating: 4,
-        startCourseText: "Start Course",
         category: "Ideation"
     },
     {
+        id: "2",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Ideation Masterclass",
-        lessons: 12,
-        students: 150,
-        level: "Beginner",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Ideation"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Ideation Masterclass",
-        lessons: 12,
-        students: 150,
-        level: "Beginner",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Ideation"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Ideation Masterclass",
-        lessons: 12,
-        students: 150,
-        level: "Beginner",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Ideation"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Ideation Masterclass",
-        lessons: 12,
-        students: 150,
-        level: "Beginner",
-        rating: 4,
-        startCourseText: "Start Course",
-        category: "Ideation"
-    },
+        courseTitle: "Advanced Ideation",
+        lessons: 15,
+        students: 300, // More students
+        level: "Advanced",
+        rating: 5,
 
+        category: "Ideation"
+    },
     {
+        id: "3",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
         courseTitle: "Web Development",
         lessons: 24,
-        students: 320,
+        students: 500, // Most students
         level: "Intermediate",
         rating: 5,
-        startCourseText: "Start Course",
-        category: "Development"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Web Development",
-        lessons: 24,
-        students: 320,
-        level: "Intermediate",
-        rating: 5,
-        startCourseText: "Start Course",
-        category: "Development"
-    },
-    {
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
-        courseTitle: "Web Development",
-        lessons: 24,
-        students: 320,
-        level: "Intermediate",
-        rating: 5,
-        startCourseText: "Start Course",
-        category: "Development"
-    },
 
-    // Add more courses as needed
+        category: "Development"
+    },
+    {
+        id: "4",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Advanced Photography",
+        lessons: 18,
+        students: 400,
+        level: "Advanced",
+        rating: 4,
+
+        category: "Photography"
+    },
+    {
+        id: "5",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Project Management",
+        lessons: 20,
+        students: 350,
+        level: "Beginner",
+        rating: 4,
+
+        category: "Management"
+    },
+    {
+        id: "6",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemfOsGnToNBlKsNYP69zv43ataC98LL_mtg&s",
+        courseTitle: "Product Management",
+        lessons: 22,
+        students: 450,
+        level: "Intermediate",
+        rating: 5,
+        category: "Management"
+    },
 ];
 
 

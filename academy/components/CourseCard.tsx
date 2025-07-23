@@ -9,7 +9,7 @@ type CourseProps = {
     students: number;
     level: string;
     rating: number;
-    startCourseText: string;
+
 };
 
 const CourseCard =({
@@ -19,7 +19,7 @@ const CourseCard =({
                                        students,
                                        level,
                                        rating,
-                                       startCourseText
+
                                    }: CourseProps)=> {
     return (
         <div className="rounded-xl shadow-md border p-4 max-w-sm bg-gray-50">
@@ -51,8 +51,9 @@ const CourseCard =({
                     </div>
                 </div>
                 <div className="flex justify-between">
+
                     <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
-                        {startCourseText} &nbsp; &gt;
+                        Start Course &nbsp; &gt;
                     </button>
 
                     <div className="flex items-center gap-1 text-orange-400">
