@@ -14,7 +14,7 @@ type CourseWithCategory = {
     students: number;
     level: string;
     rating: number;
-    startCourseText: string;
+
     category: string;
 };
 
@@ -86,6 +86,8 @@ const courses: CourseWithCategory[] = [
         rating: 5,
         category: "Management"
     },
+
+    // Add more courses as needed
 ];
 
 

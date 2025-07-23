@@ -11,12 +11,12 @@ type CourseWithCategory = {
     students: number;
     level: string;
     rating: number;
-    startCourseText: string;
+
     category: string;
 };
 
 
-// Sample courses data - replace with your actual data source
+// Sample course data - replace with your actual data source
 const courses: CourseWithCategory[] = [
     {
         id: "1",
