@@ -1,7 +1,14 @@
 import React from 'react'
 import Image from "next/image";
+import Link from "next/link";
 
-const CourseCover = () => {
+
+
+class CoursProps {
+    id : string | undefined;
+}
+
+const CourseCover = ({ id  }: CoursProps) => {
     return (
         <section >
 
@@ -51,10 +58,11 @@ const CourseCover = () => {
                     />
                 </div>
 
-
-                <button className="bg-black text-white text-sm font-semibold px-6 py-3 rounded-lg hover:bg-primary transition">
-                    Start Course
-                </button>
+                <Link href={`/lessonPage/${id}`}>
+                    <button className="bg-black text-white text-sm font-semibold px-6 py-3 rounded-lg hover:bg-primary transition">
+                        Start Course
+                    </button>
+                </Link>
             </div>
         </section>
 

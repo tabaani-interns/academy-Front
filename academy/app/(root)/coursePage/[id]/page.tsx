@@ -7,6 +7,7 @@ import CourseDetails from "@/components/CourseDetails";
 import CourseCover from "@/components/CourseCover";
 import CourseSkills from "@/components/CourseSkills";
 import ModulesSection from '@/components/ModulesSection';
+import Header from "@/components/Header";
 
 const DEMO_FAQS = [
     {
@@ -35,7 +36,8 @@ const DEMO_FAQS = [
 const Page = () => {
     return (
         <>
-            <CourseCover/>
+
+            <CourseCover id={undefined}/>
             <CourseDetails />
             <HowItWorks/>
             <ModulesSection/>

@@ -15,15 +15,15 @@ type CourseProps = {
 };
 
 const CourseCard =({
-                                       id,
-                                       image,
-                                       courseTitle,
-                                       lessons,
-                                       students,
-                                       level,
-                                       rating,
+                       id,
+                       image,
+                       courseTitle,
+                       lessons,
+                       students,
+                       level,
+                       rating,
 
-                                   }: CourseProps)=> {
+                   }: CourseProps)=> {
     return (
         <div className="rounded-xl shadow-md border p-4 max-w-sm bg-gray-50">
             <div className="rounded-lg overflow-hidden">
@@ -54,11 +54,11 @@ const CourseCard =({
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <Link href={`/coursePage/${id}`}></Link>
+                    <Link href={`/coursePage/${id}`}>
 
-                    <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
-                        Start Course &nbsp; &gt;
-                    </button>
+                        <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
+                            Start Course &nbsp; &gt;
+                        </button></Link>
 
                     <div className="flex items-center gap-1 text-orange-400">
                         {[...Array(5)].map((_, i) => (

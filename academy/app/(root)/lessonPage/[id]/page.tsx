@@ -3,7 +3,7 @@ import LessonCard from "@/components/LessonCard";
 
 const Page = () => {
     return (
-        <LessonCard/>
+        <LessonCard id={undefined}/>
     )
 }
 export default Page
