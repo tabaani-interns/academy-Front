@@ -1,6 +1,5 @@
 import NewsLetter from "@/components/NewsLetter";
-
-("useClient");
+import AdminNavigation from "@/components/AdminNavigation";
 import LargeHero from "@/components/LargeHero";
 import SearchPanel from "@/components/SearchPanel";
 import NewCourses from "@/components/NewCourses";
@@ -26,6 +25,9 @@ export default function Home() {
           </p>
         </div>
       </main>
+      
+      {/* Admin Navigation */}
+      <AdminNavigation />
     </div>
   );
 }
