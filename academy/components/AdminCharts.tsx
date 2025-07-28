@@ -1,13 +1,13 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-} from '@/components/ui/chart';
+} from "@/components/ui/chart";
 import {
   AreaChart,
   Area,
@@ -21,7 +21,7 @@ import {
   Cell,
   LineChart,
   Line,
-} from 'recharts';
+} from "recharts";
 
 // Custom tooltip component
 const CustomPieTooltip = ({ active, payload }: any) => {
@@ -39,74 +39,74 @@ const CustomPieTooltip = ({ active, payload }: any) => {
 
 // Sample data for charts
 const revenueData = [
-  { month: 'Jan', revenue: 4000, expenses: 2400, profit: 1600 },
-  { month: 'Feb', revenue: 3000, expenses: 1398, profit: 1602 },
-  { month: 'Mar', revenue: 5000, expenses: 2800, profit: 2200 },
-  { month: 'Apr', revenue: 4500, expenses: 3908, profit: 592 },
-  { month: 'May', revenue: 6000, expenses: 4800, profit: 1200 },
-  { month: 'Jun', revenue: 7000, expenses: 3800, profit: 3200 },
+  { month: "Jan", revenue: 4000, expenses: 2400, profit: 1600 },
+  { month: "Feb", revenue: 3000, expenses: 1398, profit: 1602 },
+  { month: "Mar", revenue: 5000, expenses: 2800, profit: 2200 },
+  { month: "Apr", revenue: 4500, expenses: 3908, profit: 592 },
+  { month: "May", revenue: 6000, expenses: 4800, profit: 1200 },
+  { month: "Jun", revenue: 7000, expenses: 3800, profit: 3200 },
 ];
 
 const userGrowthData = [
-  { month: 'Jan', users: 1000, active: 750 },
-  { month: 'Feb', users: 1100, active: 825 },
-  { month: 'Mar', users: 1250, active: 1000 },
-  { month: 'Apr', users: 1300, active: 1040 },
-  { month: 'May', users: 1450, active: 1160 },
-  { month: 'Jun', users: 1600, active: 1280 },
+  { month: "Jan", users: 1000, active: 750 },
+  { month: "Feb", users: 1100, active: 825 },
+  { month: "Mar", users: 1250, active: 1000 },
+  { month: "Apr", users: 1300, active: 1040 },
+  { month: "May", users: 1450, active: 1160 },
+  { month: "Jun", users: 1600, active: 1280 },
 ];
 
 const courseDistributionData = [
-  { name: 'Programming', value: 35, color: '#FFAF20' },
-  { name: 'Design', value: 25, color: '#F79646' },
-  { name: 'Business', value: 20, color: '#3E3232' },
-  { name: 'Marketing', value: 12, color: '#00C853' },
-  { name: 'Others', value: 8, color: '#2962FF' },
+  { name: "Programming", value: 35, color: "#FFAF20" },
+  { name: "Design", value: 25, color: "#F79646" },
+  { name: "Business", value: 20, color: "#3E3232" },
+  { name: "Marketing", value: 12, color: "#00C853" },
+  { name: "Others", value: 8, color: "#2962FF" },
 ];
 
 const tutorEarningsData = [
-  { month: 'Jan', earnings: 12000, tutors: 25 },
-  { month: 'Feb', earnings: 13500, tutors: 28 },
-  { month: 'Mar', earnings: 15200, tutors: 32 },
-  { month: 'Apr', earnings: 14800, tutors: 35 },
-  { month: 'May', earnings: 16500, tutors: 38 },
-  { month: 'Jun', earnings: 18200, tutors: 42 },
+  { month: "Jan", earnings: 12000, tutors: 25 },
+  { month: "Feb", earnings: 13500, tutors: 28 },
+  { month: "Mar", earnings: 15200, tutors: 32 },
+  { month: "Apr", earnings: 14800, tutors: 35 },
+  { month: "May", earnings: 16500, tutors: 38 },
+  { month: "Jun", earnings: 18200, tutors: 42 },
 ];
 
 const revenueConfig = {
   revenue: {
-    label: 'Revenue',
-    color: '#FFAF20',
+    label: "Revenue",
+    color: "#FFAF20",
   },
   expenses: {
-    label: 'Expenses',
-    color: '#F79646',
+    label: "Expenses",
+    color: "#F79646",
   },
   profit: {
-    label: 'Profit',
-    color: '#00C853',
+    label: "Profit",
+    color: "#00C853",
   },
 };
 
 const userGrowthConfig = {
   users: {
-    label: 'Total Users',
-    color: '#FFAF20',
+    label: "Total Users",
+    color: "#FFAF20",
   },
   active: {
-    label: 'Active Users',
-    color: '#F79646',
+    label: "Active Users",
+    color: "#F79646",
   },
 };
 
 const tutorEarningsConfig = {
   earnings: {
-    label: 'Earnings ($)',
-    color: '#FFAF20',
+    label: "Earnings ($)",
+    color: "#FFAF20",
   },
   tutors: {
-    label: 'Active Tutors',
-    color: '#F79646',
+    label: "Active Tutors",
+    color: "#F79646",
   },
 };
 
@@ -115,14 +115,14 @@ export function RevenueChart() {
     <ChartContainer config={revenueConfig} className="h-[300px] w-full">
       <AreaChart data={revenueData}>
         <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-        <XAxis 
-          dataKey="month" 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <XAxis
+          dataKey="month"
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
-        <YAxis 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <YAxis
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
@@ -152,14 +152,14 @@ export function UserGrowthChart() {
     <ChartContainer config={userGrowthConfig} className="h-[300px] w-full">
       <LineChart data={userGrowthData}>
         <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-        <XAxis 
-          dataKey="month" 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <XAxis
+          dataKey="month"
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
-        <YAxis 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <YAxis
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
@@ -168,14 +168,14 @@ export function UserGrowthChart() {
           dataKey="users"
           stroke="#FFAF20"
           strokeWidth={3}
-          dot={{ fill: '#FFAF20', strokeWidth: 2, r: 4 }}
+          dot={{ fill: "#FFAF20", strokeWidth: 2, r: 4 }}
         />
         <Line
           type="monotone"
           dataKey="active"
           stroke="#F79646"
           strokeWidth={3}
-          dot={{ fill: '#F79646', strokeWidth: 2, r: 4 }}
+          dot={{ fill: "#F79646", strokeWidth: 2, r: 4 }}
         />
       </LineChart>
     </ChartContainer>
@@ -210,14 +210,14 @@ export function TutorEarningsChart() {
     <ChartContainer config={tutorEarningsConfig} className="h-[300px] w-full">
       <BarChart data={tutorEarningsData}>
         <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
-        <XAxis 
-          dataKey="month" 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <XAxis
+          dataKey="month"
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
-        <YAxis 
-          tick={{ fill: '#5C4C4C', fontSize: 12 }}
-          tickLine={{ stroke: '#E0E0E0' }}
+        <YAxis
+          tick={{ fill: "#5C4C4C", fontSize: 12 }}
+          tickLine={{ stroke: "#E0E0E0" }}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />

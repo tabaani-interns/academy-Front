@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AdminLayout({
+export default function TutorLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -8,18 +8,18 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-background">
       <div className="flex flex-col">
-        {/* Admin Header */}
+        {/* Tutor Header */}
         <header className="border-b border-stroke bg-white shadow-sm">
           <div className="px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <h1 className="text-h3 font-bold text-black">
-                  Admin Dashboard
+                  Tutor Dashboard
                 </h1>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">A</span>
+                <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">T</span>
                 </div>
               </div>
             </div>
