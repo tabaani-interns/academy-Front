@@ -25,9 +25,6 @@ export default function Home() {
           </p>
         </div>
       </main>
-
-      {/* Admin Navigation */}
-      <AdminNavigation />
     </div>
   );
 }

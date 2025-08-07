@@ -1,7 +1,14 @@
+"use client";
+
 import React from "react";
 import { Search, Bell, ChevronDown } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import Link from 'next/link';
 
 const Header = () => {
+  const { data: session } = useSession();
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,23 +55,41 @@ const Header = () => {
             </div>
 
             {/* User Profile */}
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                  <span className="text-body2 font-roboto font-medium text-gray-700">
-                    H
-                  </span>
+            {session ? (
+              <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={session.user?.image || ""}
+                    alt={session.user?.name || ""}
+                    className="h-8 w-8 rounded-full"
+                  />
+                  <div className="hidden sm:block">
+                    <p className="text-subtitle2 font-roboto text-gray-700">
+                      {session.user?.name}
+                    </p>
+                    <p className="text-body2 font-roboto text-gray-500">
+                      {session.user?.role || "student"}
+                    </p>
+                  </div>
                 </div>
-                <div className="hidden sm:block">
-                  <p className="text-subtitle2 font-roboto text-gray-700">
-                    Hamza,
-                  </p>
-                  <p className="text-body2 font-roboto text-gray-500">
-                    Local Host
-                  </p>
-                </div>
+                <Button onClick={() => signOut()} variant="outline" size="sm">
+                  Logout
+                </Button>
               </div>
-            </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link href="/login">
+                  <Button variant="outline" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button size="sm">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            )}
 
             {/* Notification Bell */}
             <button className="relative p-2 bg-primary-5 rounded-md hover:bg-primary-10 transition-colors">
