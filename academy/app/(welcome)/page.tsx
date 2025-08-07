@@ -1,4 +1,4 @@
-import NewsLetter from "@/components/NewsLetter";
+import Newsletter from "@/components/NewsLetter";
 import AdminNavigation from "@/components/AdminNavigation";
 import LargeHero from "@/components/LargeHero";
 import SearchPanel from "@/components/SearchPanel";
@@ -12,7 +12,7 @@ export default function Home() {
       <SearchPanel />
       <NewCourses />
       <TopCourses />
-      <NewsLetter />
+      <Newsletter />
 
       {/* Additional content can go here */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
