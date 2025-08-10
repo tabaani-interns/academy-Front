@@ -1,4 +1,4 @@
-
+"use client"
 import React, {useRef, useState} from 'react'
 import {ChevronLeft, ChevronRight} from "lucide-react";
 
@@ -19,16 +19,7 @@ const skills = [
     { icon: "✉️", label: "Reviews" },
     { icon: "📈", label: "Business strategy" },
     { icon: "📄", label: "Content marketing" },
-    { icon: "🖥️", label: "Display your experience" },
-    { icon: "🛍️", label: "Booking" },
-    { icon: "✉️", label: "Reviews" },
-    { icon: "🛍️", label: "Booking" },
-    { icon: "✉️", label: "Reviews" },
-    { icon: "📈", label: "Business strategy" },
-    { icon: "📄", label: "Content marketing" },
-    { icon: "🖥️", label: "Display your experience" },
-    { icon: "🛍️", label: "Booking" },
-    { icon: "✉️", label: "Reviews" },
+
 ];
 
 const CourseSkills = () => {
@@ -64,7 +55,7 @@ const CourseSkills = () => {
             {/* Scrollable container */}
             <div className="relative flex items-center justify-center max-w-[1500px] mx-auto">
 
-            {/* Left button */}
+                {/* Left button */}
                 {isScrolled && (
                     <button
                         onClick={() => scroll("left")}
@@ -80,7 +71,7 @@ const CourseSkills = () => {
                     className="flex gap-10 overflow-x-auto scroll-smooth px-12 no-scrollbar"
                 >
 
-                {skills.map((skill, index) => (
+                    {skills.map((skill, index) => (
                         <div
                             key={index}
                             className="flex flex-col items-center cursor-pointer group p-8 max-w-[220px] w-full"
@@ -108,4 +99,4 @@ const CourseSkills = () => {
         </section>
     );
 };
-    export default CourseSkills;
+export default CourseSkills;

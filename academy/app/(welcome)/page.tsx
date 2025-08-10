@@ -1,11 +1,15 @@
+"use client"
 import NewsLetter from "@/components/NewsLetter";
-import AdminNavigation from "@/components/AdminNavigation";
+
+
 import LargeHero from "@/components/LargeHero";
 import SearchPanel from "@/components/SearchPanel";
 import NewCourses from "@/components/NewCourses";
 import TopCourses from "@/components/TopCourses";
 
-export default function Home() {
+
+export default  function Home() {
+
   return (
     <div className="min-h-screen bg-white">
       <LargeHero />

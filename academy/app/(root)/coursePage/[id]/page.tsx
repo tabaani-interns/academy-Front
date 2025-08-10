@@ -1,4 +1,4 @@
-"use client"
+
 
 import React from 'react'
 import {FaqSectionWithCategories} from "@/components/faq-with-categories";
@@ -7,6 +7,8 @@ import CourseDetails from "@/components/CourseDetails";
 import CourseCover from "@/components/CourseCover";
 import CourseSkills from "@/components/CourseSkills";
 import ModulesSection from '@/components/ModulesSection';
+import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const DEMO_FAQS = [
     {
@@ -32,11 +34,15 @@ const DEMO_FAQS = [
 ];
 
 
-const Page = () => {
+
+
+const Page = ({ params }: { params: { id: string } }) => {
+
+console.log("idfrompage", params.id);
     return (
         <>
-            <CourseCover/>
-            <CourseDetails />
+            <CourseCover params={{ id: params.id }} />
+            <CourseDetails params={{ id: params.id }} />
             <HowItWorks/>
             <ModulesSection/>
             <CourseSkills/>
@@ -47,9 +53,22 @@ const Page = () => {
                 contactInfo={{
                     title: "",
                     buttonText: "See All FAQs",
-                    onContact: () => console.log("Contact support clicked"),
                 }}
             />
+
+            <section className={` text-center items-center justify-center p-6`}>
+
+                <p className={`text-xl text-gray-900 font-roboto`} >Start today and get a certificate in Fundamentals of Hosting</p>
+
+            </section>
+            <section className={` text-center items-center justify-center p-6 `}>
+                <Link href={`/lessonPage/${params.id}`}>
+                    <button      className="px-4 py-2 bg-black text-white  rounded-lg hover:bg-yellow-500">Start Course</button>
+                </Link>
+            </section>
+
+
+            <Footer/>
         </>
     )
 }
