@@ -1,75 +1,102 @@
-"use client"
+import React from "react";
+import {
+    ThumbsUp,
+    ThumbsDown,
+    Share2,
+    CheckIcon,
 
-import React from 'react'
-import {FaqSectionWithCategories} from "@/components/faq-with-categories";
-import HowItWorks from "@/components/HowItWorks";
-import CourseDetails from "@/components/CourseDetails";
-import CourseCover from "@/components/CourseCover";
-import CourseSkills from "@/components/CourseSkills";
-import ModulesSection from '@/components/ModulesSection';
-import Footer from "@/components/Footer";
-import Link from "next/link";
-
-const DEMO_FAQS = [
-    {
-        question: "How do I get started?",
-        answer: "Getting started is easy! Simply sign up for an account and follow our quick setup guide. We'll walk you through each step of the process.",
-        category: "Getting Started",
-    },
-    {
-        question: "What payment methods do you accept?",
-        answer: "We accept all major credit cards, PayPal, and bank transfers. All payments are processed securely through our payment partners.",
-        category: "Billing",
-    },
-    {
-        question: "Is there a free trial available?",
-        answer: "Yes! We offer a 14-day free trial with full access to all features. No credit card required to start your trial.",
-        category: "Pricing",
-    },
-    {
-        question: "How can I contact support?",
-        answer: "Our support team is available 24/7 through our help center, email support, or live chat. We typically respond within 2 hours.",
-        category: "Support",
-    },
-];
-
-
+} from "lucide-react";
+import Image from "next/image";
+import CustomVideoPlayer from "@/components/CustomVideoPlayer";
 class CoursProps {
     id : string | undefined;
 }
-
-const Page = ({ id  }: CoursProps) => {
+const LessonCard= ({ id  }: CoursProps) => {
     return (
-        <>
-            <CourseCover id={undefined}/>
-            <CourseDetails />
-            <HowItWorks/>
-            <ModulesSection/>
-            <CourseSkills/>
-            <FaqSectionWithCategories
-                title="FAQs"
-                description=""
-                items={DEMO_FAQS}
-                contactInfo={{
-                    title: "",
-                    buttonText: "See All FAQs",
-                    onContact: () => console.log("Contact support clicked"),
+        <div className="bg-black text-white p-6 rounded-xl max-w-4xl mx-auto shadow-lg space-y-4">
+            {/* Course Title */}
+            <h2 className="text-2xl md:text-3xl font-semibold">Course – Introduction to Hosting</h2>
+
+            {/* Video Section */}
+
+
+            <CustomVideoPlayer
+                sources={{
+                    sd: "/videos/lesson1_sd.mp4",
+                    hd: "/videos/lesson1_hd.mp4",
                 }}
+                poster="/assets/images/course/courseCover.png"
             />
-            <section className={` text-center items-center justify-center p-6`}>
 
-                <p className={`text-xl text-gray-900 font-roboto`} >Start today and get a certificate in Fundamentals of Hosting</p>
+            {/* Lesson Info */}
+            <div className="flex items-start gap-4">
+                <Image
+                    src="/assets/images/course/iab-europe-logo.png" // Replace with actual avatar
+                    alt="Instructor"
+                    width={48}
+                    height={48}
+                    className="rounded-full"
+                />
+                <div className=" justify-between items-start w-full gap-2">
+                    <div className="flex items-center m">
+                        <h3 className="text-lg md:text-xl font-medium">
+                            Lesson 1 – <span className="font-semibold">Implement Story telling</span>
+                        </h3>
+                    </div>
 
-            </section>
-            <section className={` text-center items-center justify-center p-6 `}>
-                <Link href={`/coursePage/${id}`}>
-                    <button      className="px-4 py-2 bg-black text-white  rounded-lg hover:bg-yellow-500">Start Course</button>
-                </Link>
-            </section>
+
+                    <div className="flex items-center justify-between text-sm text-gray-400">
+                        {/* Left side: Tutor name + check */}
+                        <div className="flex items-center space-x-1">
+                            <span className="font-semibold">Tutor name</span> &nbsp;
+
+                            <CheckIcon className="bg-primary text-black border-none size-4 rounded p-0.5" stroke="black" />
 
 
-            <Footer/>
-        </>
-    )
-}
-export default Page
+                        </div>
+
+                        {/* Right side: Thumbs, Share, etc */}
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-1 text-green-400">
+                                <ThumbsUp size={16}  />
+                                <span>145</span>
+                            </div>
+                            <div className="flex items-center gap-1 text-gray-400">
+                                <ThumbsDown size={16} />
+                                <span>6</span>
+                            </div>
+                            <div className="flex items-center gap-1 text-gray-400">
+                                <Share2 size={16} />
+                                <span>6</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {/* Description */}
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+                This module would provide strategies for providing exceptional customer
+                service and creating a welcoming and comfortable environment for visitors.
+                It would cover topics such as communication skills, problem-solving,
+                and attention to detail. Participants would learn how to anticipate and
+                respond to the needs of visitors, and how to create a hospitable and
+                inclusive environment for all.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
+                <button className="px-6 py-2 border border-gray-400  rounded-lg text-sm hover:bg-gray-800 transition">
+                    Skip To The Test
+                </button>
+                <button className="px-6 py-2 bg-white text-black font-medium rounded-lg text-sm hover:bg-gray-200 transition">
+                    Test Your Knowledge
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default LessonCard;

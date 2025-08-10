@@ -12,9 +12,10 @@ export default function WelcomeLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <>
-      <Header />
+      <Header  />
       {children}
       <Footer />
     </>

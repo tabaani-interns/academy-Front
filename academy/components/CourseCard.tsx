@@ -2,20 +2,11 @@
 import Image from "next/image";
 import {BookOpen, Star, Trophy, User} from "lucide-react";
 import Link from "next/link";
+import {Course} from "@/app/model/course.model";
 
-type CourseProps = {
-    id: string;
-    image: string;
-    courseTitle: string;
-    lessons: number;
-    students: number;
-    level: string;
-    rating: number;
-
-};
 
 const CourseCard =({
-                       id,
+                       _id,
                        image,
                        courseTitle,
                        lessons,
@@ -23,18 +14,28 @@ const CourseCard =({
                        level,
                        rating,
 
-                   }: CourseProps)=> {
+                   }: Course)=> {
+
+    const isAbsoluteUrl = (url: string) => /^https?:\/\//.test(url);
+
+    const imgUrl = isAbsoluteUrl(image!)
+        ? image
+        : `${process.env.NEXT_PUBLIC_API_BASE_URL}${image?.startsWith('/') ? '' : '/'}${image}`;
+
+
+
     return (
         <div className="rounded-xl shadow-md border p-4 max-w-sm bg-gray-50">
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg  overflow-hidden">
 
                 <Image
-                    src={image}
-                    alt={courseTitle}
+                    src={imgUrl!}
+                    alt={courseTitle!}
                     width={360}
                     height={413}
                     className="w-full h-52 object-cover"
                 />
+
             </div>
             <div className="mt-4 space-y-2">
                 <h2 className="text-lg text-black font-semibold">{courseTitle}</h2>
@@ -54,7 +55,7 @@ const CourseCard =({
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <Link href={`/coursePage/${id}`}>
+                    <Link href={`/coursePage/${_id}`}>
 
                         <button className="mt-3 p-6 bg-black text-white py-2 rounded-lg hover:bg-yellow-500">
                             Start Course &nbsp; &gt;
@@ -65,8 +66,8 @@ const CourseCard =({
                             <Star
                                 key={i}
                                 size={18}
-                                fill={i < rating ? "orange" : "none"}
-                                stroke={i < rating ? "orange" : "gray"}
+                                fill={i < rating! ? "orange" : "none"}
+                                stroke={i < rating! ? "orange" : "gray"}
                             />
                         ))}
                     </div>

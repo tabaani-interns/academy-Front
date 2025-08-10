@@ -10,8 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {LucideUserRound, PersonStanding, PersonStandingIcon, User} from "lucide-react";
-import {Profiler} from "react";
+import { LucideUserRound } from "lucide-react";
 
 interface FaqSectionWithCategoriesProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
@@ -25,12 +24,18 @@ interface FaqSectionWithCategoriesProps extends React.HTMLAttributes<HTMLElement
     title: string;
     description?: string;
     buttonText: string;
-    onContact?: () => void;
   };
 }
 
 const FaqSectionWithCategories = React.forwardRef<HTMLElement, FaqSectionWithCategoriesProps>(
     ({ className, title, description, items, contactInfo, ...props }, ref) => {
+
+      // Moved handler here to keep everything inside the Client Component
+      const handleContactClick = () => {
+        console.log("Contact support clicked");
+        // You can replace this with any logic (modal, redirect, etc.)
+      };
+
       return (
           <section
               ref={ref}
@@ -41,13 +46,9 @@ const FaqSectionWithCategories = React.forwardRef<HTMLElement, FaqSectionWithCat
               <div className="max-w-3xl mx-auto">
                 {/* Header */}
                 <div className="text-center space-y-4 mb-12">
-                  <h2 className="text-4xl font-bold text-foreground">
-                    {title}
-                  </h2>
+                  <h2 className="text-4xl font-bold text-foreground">{title}</h2>
                   {description && (
-                      <p className="text-muted-foreground">
-                        {description}
-                      </p>
+                      <p className="text-muted-foreground">{description}</p>
                   )}
                 </div>
 
@@ -74,7 +75,7 @@ const FaqSectionWithCategories = React.forwardRef<HTMLElement, FaqSectionWithCat
                             {item.category && (
                                 <Badge
                                     variant="secondary"
-                                    className="w-fit text-xs font-normal "
+                                    className="w-fit text-xs font-normal"
                                 >
                                   {item.category}
                                 </Badge>
@@ -84,27 +85,29 @@ const FaqSectionWithCategories = React.forwardRef<HTMLElement, FaqSectionWithCat
                             </h3>
                           </div>
                         </AccordionTrigger>
-                        <AccordionContent className="px-6 pt-4 pb-6 ">
+                        <AccordionContent className="px-6 pt-4 pb-6">
                           <p className="text-muted-foreground leading-relaxed">
                             {item.answer}
                           </p>
                         </AccordionContent>
-                      </AccordionItem >
+                      </AccordionItem>
                   ))}
                 </Accordion>
 
                 {/* Contact Section */}
                 {contactInfo && (
                     <div className="mt-12 text-center">
-                      <p className="text-muted-foreground mb-4">
-                        {contactInfo.title}
-                      </p>
+                      <p className="text-muted-foreground mb-4">{contactInfo.title}</p>
                       {contactInfo.description && (
                           <p className="text-sm text-muted-foreground mb-4">
                             {contactInfo.description}
                           </p>
                       )}
-                      <Button size="sm" onClick={contactInfo.onContact} className={`bg-white border-1 h-[50px] hover:bg-black text-primary`}>
+                      <Button
+                          size="sm"
+                          onClick={handleContactClick}
+                          className="bg-white border-1 h-[50px] hover:bg-black text-primary"
+                      >
                         <LucideUserRound className="text-primary" /> &nbsp;
                         {contactInfo.buttonText}
                       </Button>
@@ -116,6 +119,6 @@ const FaqSectionWithCategories = React.forwardRef<HTMLElement, FaqSectionWithCat
       );
     }
 );
-FaqSectionWithCategories.displayName = "FaqSectionWithCategories";
 
+FaqSectionWithCategories.displayName = "FaqSectionWithCategories";
 export { FaqSectionWithCategories };

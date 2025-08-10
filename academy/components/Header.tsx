@@ -1,7 +1,52 @@
-import React from "react";
-import { Search, Bell, ChevronDown } from "lucide-react";
+"use client"
+import React, {useEffect, useState} from "react";
 
-const Header = () => {
+import { Search, Bell, ChevronDown } from "lucide-react";
+import axios from "axios";
+import {User} from "@/app/model/user.model";
+import Image from "next/image";
+
+const Header =  () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userId = localStorage.getItem("userId");
+      const token = localStorage.getItem("token");
+
+      if (!userId) {
+        setError("No user ID found");
+        return;
+      }
+
+      if (!token) {
+        setError("No token found");
+        return;
+      }
+
+      try {
+        const res = await axios.get<{ data: User }>(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+        );
+
+
+        setUser(res.data.data);
+      } catch (err: any) {
+        console.error("Fetch error:", err);
+        setError(err.response?.data?.message || "Failed to fetch user");
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,17 +95,22 @@ const Header = () => {
             {/* User Profile */}
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                  <span className="text-body2 font-roboto font-medium text-gray-700">
-                    H
-                  </span>
+                <div className="h-12 w-12 rounded-full  flex items-center justify-center">
+                  <Image
+                      src={user?.image || "/assets/images/brand/logo.png"} // your fallback image
+                      alt="User Image"
+                      width={0}
+                      height={0}
+                      className="h-8 w-8 rounded-full"
+                  />
+
                 </div>
                 <div className="hidden sm:block">
                   <p className="text-subtitle2 font-roboto text-gray-700">
-                    Hamza,
+                    {user?.firstName},
                   </p>
                   <p className="text-body2 font-roboto text-gray-500">
-                    Local Host
+                    {user?.role}
                   </p>
                 </div>
               </div>
