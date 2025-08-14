@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, {useEffect, useState} from "react";
 import {
     ThumbsUp,
     ThumbsDown,
@@ -8,14 +9,64 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import CustomVideoPlayer from "@/components/CustomVideoPlayer";
-class CoursProps {
-    id : string | undefined;
-}
-const LessonCard= ({ id  }: CoursProps) => {
+import {Course} from "@/app/models/course.model";
+import axios from "axios";
+
+const LessonCard= ({ params }: { params: { id: string } }) => {
+    const _id = params.id;
+
+    const [course, setCourse] = useState<Course>();
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchCourse = async () => {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                setError("No token found");
+                return;
+            }
+
+            try {
+                const res = await axios.get<{ data: Course }>(
+                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/courses/${_id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                setCourse(res.data.data);
+            } catch (err: any) {
+                console.error("Fetch error:", err);
+                setError(err.response?.data?.message || "Failed to fetch course");
+            }
+        };
+
+        fetchCourse();
+    }, [_id]);
+
+    const isAbsoluteUrl = (url: string) => /^https?:\/\//.test(url);
+
+    const tutorImg = course?.owner?.image
+        ? isAbsoluteUrl(course?.owner?.image)
+            ? course?.owner?.image
+            : `${process.env.NEXT_PUBLIC_API_BASE_URL}${course?.owner?.image.startsWith("/") ? "" : "/"}${course?.owner?.image}`
+        : "/assets/images/brand/logo.png";
+
+    if (error) {
+        return <p className="text-red-500">Error: {error}</p>;
+    }
+
+    if (!course) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <div className="bg-black text-white p-6 rounded-xl max-w-4xl mx-auto shadow-lg space-y-4">
             {/* Course Title */}
-            <h2 className="text-2xl md:text-3xl font-semibold">Course – Introduction to Hosting</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold">Course –   {course.courseTitle}</h2>
 
             {/* Video Section */}
 
@@ -31,7 +82,7 @@ const LessonCard= ({ id  }: CoursProps) => {
             {/* Lesson Info */}
             <div className="flex items-start gap-4">
                 <Image
-                    src="/assets/images/course/iab-europe-logo.png" // Replace with actual avatar
+                    src={tutorImg}
                     alt="Instructor"
                     width={48}
                     height={48}

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { User } from "@/app/model/user.model";
+import { User } from "@/app/models/user.model";
 import Image from "next/image";
 
 const Profile = () => {
@@ -87,13 +87,6 @@ const Profile = () => {
             }
             if (formData.role !== originalData.role) {
                 updatedUser.role = formData.role;
-            }
-            if (
-                formData.NewsLettersSubscription !==
-                originalData.NewsLettersSubscription
-            ) {
-                updatedUser.NewsLettersSubscription =
-                    formData.NewsLettersSubscription;
             }
 
             if (Object.keys(updatedUser).length === 0) {
@@ -193,19 +186,6 @@ const Profile = () => {
                                     <label className="block text-sm font-medium text-gray-500">Email</label>
                                     <p className="mt-1 p-3 bg-gray-50 rounded-lg border">{formData.email}</p>
                                 </div>
-                                <div className="sm:col-span-2 flex items-center justify-between border-t pt-4">
-                                    <div>
-                                        <p className="text-sm text-gray-500">Newsletter Subscription</p>
-                                        <p className="font-medium">
-                                            {formData.NewsLettersSubscription ? "Subscribed" : "Not Subscribed"}
-                                        </p>
-                                    </div>
-                                    <span
-                                        className={`h-3 w-3 rounded-full ${
-                                            formData.NewsLettersSubscription ? "bg-green-500" : "bg-red-500"
-                                        }`}
-                                    ></span>
-                                </div>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-5">
@@ -256,23 +236,7 @@ const Profile = () => {
                                             <option value="Admin">Admin</option>
                                         </select>
                                     </div>
-                                    <div className="sm:col-span-2 flex items-center justify-between border-t pt-4">
-                                        <div>
-                                            <p className="text-sm font-medium text-gray-700">Subscribe to Newsletter</p>
-                                            <p className="text-xs text-gray-500">Receive updates and resources</p>
-                                        </div>
-                                        <label className="relative inline-flex items-center cursor-pointer">
-                                            <input
-                                                type="checkbox"
-                                                name="NewsLettersSubscription"
-                                                checked={formData.NewsLettersSubscription}
-                                                onChange={handleChange}
-                                                className="sr-only peer"
-                                            />
-                                            <div className="w-11 h-6 bg-gray-300 peer-checked:bg-orange-600 rounded-full peer transition-colors"></div>
-                                            <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
-                                        </label>
-                                    </div>
+
                                 </div>
                                 <div className="flex gap-4">
                                     <button

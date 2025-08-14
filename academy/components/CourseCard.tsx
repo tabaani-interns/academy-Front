@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {BookOpen, Star, Trophy, User} from "lucide-react";
 import Link from "next/link";
-import {Course} from "@/app/model/course.model";
+import {Course} from "@/app/models/course.model";
 
 
 const CourseCard =({

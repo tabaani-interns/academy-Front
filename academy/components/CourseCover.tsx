@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { Course } from "@/app/model/course.model";
+import { Course } from "@/app/models/course.model";
 
 const CourseCover = ({ params }: { params: { id: string } }) => {
     const _id = params.id;

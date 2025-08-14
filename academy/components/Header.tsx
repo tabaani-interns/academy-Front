@@ -1,51 +1,62 @@
 "use client"
 import React, {useEffect, useState} from "react";
 
-import { Search, Bell, ChevronDown } from "lucide-react";
+import {Search, Bell, ChevronDown, User2} from "lucide-react";
 import axios from "axios";
-import {User} from "@/app/model/user.model";
+import {User} from "@/app/models/user.model";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Header =  () => {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState("");
-
+  const router = useRouter();
   useEffect(() => {
-    const fetchUser = async () => {
+
       const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
 
-      if (!userId) {
-        setError("No user ID found");
-        return;
-      }
+      const fetchUser = async () => {
 
-      if (!token) {
-        setError("No token found");
-        return;
-      }
+        if (!userId) {
+          setError("No user ID found");
+          return;
+        }
 
-      try {
-        const res = await axios.get<{ data: User }>(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-        );
+        if (!token) {
+          setError("No token found");
+          return;
+        }
+        try {
+          const res = await axios.get<{ data: User }>(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/${userId}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+          );
+          setUser(res.data.data);
+        } catch (err: any) {
+         console.error("Fetch error:", err.message);
+          setError(err.message);
+        }
+      };
 
+    if(userId){
+      fetchUser()
+    }
 
-        setUser(res.data.data);
-      } catch (err: any) {
-        console.error("Fetch error:", err);
-        setError(err.response?.data?.message || "Failed to fetch user");
-      }
-    };
-
-    fetchUser();
   }, []);
 
+  const handleLogout = () => {
+    Cookies.remove("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("token");
+    router.push('/login');
+
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -92,35 +103,58 @@ const Header =  () => {
               />
             </div>
 
-            {/* User Profile */}
+            {/* User Section */}
             <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-2">
-                <div className="h-12 w-12 rounded-full  flex items-center justify-center">
-                  <Image
-                      src={user?.image || "/assets/images/brand/logo.png"} // your fallback image
-                      alt="User Image"
-                      width={0}
-                      height={0}
-                      className="h-8 w-8 rounded-full"
-                  />
+              {user ? (
+                  <div className="flex items-center space-x-4">
+                    <Link href="/profile">
+                      <div className="flex items-center space-x-2">
+                        <Image
+                            src={user.image || "/assets/images/brand/logo.png"}
+                            alt="User Image"
+                            width={32}
+                            height={32}
+                            className="rounded-full"
+                        />
+                        <div className="hidden sm:block">
+                          <p className="text-gray-700">{user.firstName}</p>
+                          <p className="text-gray-500">{user.role}</p>
+                        </div>
+                      </div>
+                    </Link>
 
-                </div>
-                <div className="hidden sm:block">
-                  <p className="text-subtitle2 font-roboto text-gray-700">
-                    {user?.firstName},
-                  </p>
-                  <p className="text-body2 font-roboto text-gray-500">
-                    {user?.role}
-                  </p>
-                </div>
-              </div>
+                    {/* Notification Bell */}
+                    <button className="relative p-2 bg-primary-5 rounded-md hover:bg-primary-10 transition-colors">
+                      <Bell className="h-6 w-6 text-primary" />
+                      <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+                    </button>
+                    <button
+                        onClick={handleLogout}
+                        className="px-3 py-2 bg-gray-100 text-gary-400 rounded hover:bg-red-600 transition"
+                    >
+                      Logout
+                    </button>
+
+
+                  </div>
+              ) : (
+                  <Link href="/login">
+                    <button className="flex items-center space-x-2 px-4 py-2 bg-primary-5 hover:bg-primary-10 rounded-md transition">
+                      <Image
+                          src="/assets/images/brand/logo.png"
+                          alt="Profile Icon"
+                          width={24}
+                          height={24}
+                          className="rounded-full"
+                      />
+                      <span className="text-gray-700">Login / Sign-Up</span>
+                    </button>
+                  </Link>
+              )}
+
             </div>
 
-            {/* Notification Bell */}
-            <button className="relative p-2 bg-primary-5 rounded-md hover:bg-primary-10 transition-colors">
-              <Bell className="h-6 w-6 text-primary" />
-              <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
-            </button>
+
           </div>
 
           {/* Mobile menu button */}

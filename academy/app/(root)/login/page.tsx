@@ -3,14 +3,13 @@ import { FormEvent, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader2, Eye, EyeOff, Lock, Mail, Rocket } from "lucide-react";
-
+import Cookies from "js-cookie";
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent) => {
@@ -26,7 +25,8 @@ export default function LoginPage() {
                     password,
                 }
             );
-
+            Cookies.set("token", res.data.data.token, { expires: 1 });
+            Cookies.set("userRole", res.data.data.user.role);
             localStorage.setItem("token", res.data.data.token);
             localStorage.setItem("userId", res.data.data.user._id);
 
@@ -56,7 +56,7 @@ export default function LoginPage() {
                             Welcome Back to Tabaani
                         </h2>
                         <p className="text-white/90 mb-8">
-                            Your journey continues here. Sign in to access your personalized dashboard and continue where you left off.
+                            Your journey continues here. Sign in to access your courses and continue where you left off.
                         </p>
                     </div>
 
@@ -76,7 +76,7 @@ export default function LoginPage() {
                         <div className="bg-white/10 p-4 rounded-xl">
                             <div className="flex items-center gap-3">
                                 <div className="bg-white/20 p-2 rounded-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-200" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                         <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                                     </svg>
@@ -157,18 +157,7 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="remember"
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                                className="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500"
-                            />
-                            <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
-                                Remember me
-                            </label>
-                        </div>
+
 
                         <button
                             type="submit"

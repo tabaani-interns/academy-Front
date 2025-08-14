@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
 import CourseCard from "@/components/CourseCard";
-import {Course} from "@/app/model/course.model";
+import {Course} from "@/app/models/course.model";
 
 
 

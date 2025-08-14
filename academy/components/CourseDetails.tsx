@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react'
 import {CircleCheck, Clock5, CoinsIcon, Menu, SignalHigh} from "lucide-react";
-import {Course} from "@/app/model/course.model";
+import {Course} from "@/app/models/course.model";
 import axios from "axios";
 
 const CourseDetails  = ({ params }: { params: { id: string } }) => {

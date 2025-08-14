@@ -4,7 +4,7 @@ import { Filter } from "lucide-react";
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 import axios from "axios";
-import { Course } from "@/app/model/course.model";
+import { Course } from "@/app/models/course.model";
 
 const categories = [
     "All Courses",

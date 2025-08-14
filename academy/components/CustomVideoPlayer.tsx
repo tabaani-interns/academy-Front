@@ -140,16 +140,16 @@ const CustomVideoPlayer: React.FC<Props> = ({ sources, poster }) => {
                     <div className="relative flex-1 mx-2 cursor-pointer" onClick={handleSeek}>
                         <div className="bg-gray-700 h-4 rounded-full w-full">
                             <div
-                                className="bg-yellow-400 h-4 rounded-full flex items-center justify-center text-black text-[10px] font-semibold"
+                                className="bg-yellow-400 h-4 rounded-full"
                                 style={{ width: `${progressPercent}%` }}
-                            >
-                                {duration > 0 && (
-                                    <span className="px-2">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                  </span>
-                                )}
-                            </div>
+                            ></div>
                         </div>
+                        {/* Fixed time display */}
+                        {duration > 0 && (
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-[10px] font-semibold">
+                                {formatTime(currentTime)} / {formatTime(duration)}
+                            </div>
+                        )}
                     </div>
 
                     {/* Mute */}

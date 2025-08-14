@@ -4,7 +4,7 @@ export interface User {
     lastName?: string;
     email?: string;
     image?: string;
-    NewsLettersSubscription?: boolean;
+
     role?: 'Admin' | 'Tutor' | 'Student';
     createdAt?: string;
     updatedAt?: string;

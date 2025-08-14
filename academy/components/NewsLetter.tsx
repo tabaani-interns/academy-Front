@@ -16,7 +16,7 @@ const Newsletter = () => {
         try {
 
             await axios.post(
-                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/newsletter/subscribe`,
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/newsletter/`,
                 { email }
             );
 
@@ -24,7 +24,7 @@ const Newsletter = () => {
             setEmail("");
         } catch (error: any) {
             setStatus("error");
-            setErrorMsg(error.response?.data?.message || "Failed to subscribe.");
+            setErrorMsg(error.response?.data?.message);
         }
     };
 

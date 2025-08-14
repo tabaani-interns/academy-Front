@@ -1,4 +1,4 @@
-import {User} from "@/app/model/user.model";
+import {User} from "@/app/models/user.model";
 
 export interface Course {
     _id?: string;

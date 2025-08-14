@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import {Loader2, Eye, EyeOff, User, Mail, Lock, Rocket, BookOpen} from "lucide-react";
 
 export default function SignUpPage() {
-    const [name, setName] = useState("");
+    const [firstName, setfirstName] = useState("");
+    const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +21,7 @@ export default function SignUpPage() {
         setLoading(true);
         setError("");
 
-        // Basic validation
+
         if (password !== confirmPassword) {
             setError("Passwords do not match");
             setLoading(false);
@@ -37,7 +38,8 @@ export default function SignUpPage() {
             const res = await axios.post(
                 `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/sign-up`,
                 {
-                    name,
+                    firstName,
+                    lastName,
                     email,
                     password,
                 }
@@ -46,7 +48,7 @@ export default function SignUpPage() {
             localStorage.setItem("token", res.data.data.token);
             localStorage.setItem("userId", res.data.data.user._id);
 
-            router.push("/");
+            router.push("/login");
         } catch (err: any) {
             setError(err.response?.data?.message || "Sign up failed");
             console.log(err);
@@ -130,7 +132,7 @@ export default function SignUpPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="text-sm font-medium text-gray-700 mb-2 block">Full Name</label>
+                            <label className="text-sm font-medium text-gray-700 mb-2 block">First Name</label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
                                     <User size={18} />
@@ -138,8 +140,24 @@ export default function SignUpPage() {
                                 <input
                                     type="text"
                                     className="pl-10 w-full rounded-xl border border-gray-200 px-4 py-3 focus:ring-2 focus:ring-orange-400 focus:outline-none focus:border-transparent transition"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    value={firstName}
+                                    onChange={(e) => setfirstName(e.target.value)}
+                                    placeholder="John Doe"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-gray-700 mb-2 block">Last Name</label>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                    <User size={18} />
+                                </div>
+                                <input
+                                    type="text"
+                                    className="pl-10 w-full rounded-xl border border-gray-200 px-4 py-3 focus:ring-2 focus:ring-orange-400 focus:outline-none focus:border-transparent transition"
+                                    value={lastName}
+                                    onChange={(e) => setlastName(e.target.value)}
                                     placeholder="John Doe"
                                     required
                                 />
