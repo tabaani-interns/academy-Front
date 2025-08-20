@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Trash2, ShoppingCart } from 'lucide-react';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Trash2, ShoppingCart } from "lucide-react";
 
 interface CartItem {
   courseId: {
@@ -35,8 +35,8 @@ export default function CartPage() {
   const [processingCheckout, setProcessingCheckout] = useState(false);
 
   useEffect(() => {
-    if (status === 'loading') return;
-    if (!session) router.push('/login');
+    if (status === "loading") return;
+    if (!session) router.push("/login");
   }, [session, status, router]);
 
   useEffect(() => {
@@ -47,14 +47,14 @@ export default function CartPage() {
 
   const fetchCart = async () => {
     try {
-      const response = await fetch('/api/cart');
+      const response = await fetch("/api/cart");
       if (response.ok) {
         const data = await response.json();
         setCartItems(data.items);
         setTotalAmount(data.totalAmount);
       }
     } catch (error) {
-      console.error('Error fetching cart:', error);
+      console.error("Error fetching cart:", error);
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ export default function CartPage() {
   const removeFromCart = async (courseId: string) => {
     try {
       const response = await fetch(`/api/cart/${courseId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
@@ -72,20 +72,20 @@ export default function CartPage() {
         setTotalAmount(data.cart.totalAmount);
       }
     } catch (error) {
-      console.error('Error removing from cart:', error);
+      console.error("Error removing from cart:", error);
     }
   };
 
   const handleCheckout = async () => {
     setProcessingCheckout(true);
-    
+
     try {
       // Enroll in all courses (dummy purchase)
-      const enrollmentPromises = cartItems.map(item => 
-        fetch('/api/enrollments', {
-          method: 'POST',
+      const enrollmentPromises = cartItems.map((item) =>
+        fetch("/api/enrollments", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             courseId: item.courseId._id,
@@ -97,20 +97,19 @@ export default function CartPage() {
 
       // Clear cart after successful enrollment
       await Promise.all(
-        cartItems.map(item => removeFromCart(item.courseId._id))
+        cartItems.map((item) => removeFromCart(item.courseId._id))
       );
 
       // Redirect to dashboard
-      router.push('/dashboard?checkout=success');
-      
+      router.push("/dashboard?checkout=success");
     } catch (error) {
-      console.error('Error during checkout:', error);
+      console.error("Error during checkout:", error);
     } finally {
       setProcessingCheckout(false);
     }
   };
 
-  if (status === 'loading' || loading) {
+  if (status === "loading" || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div>Loading...</div>
@@ -126,9 +125,12 @@ export default function CartPage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Shopping Cart
+          </h1>
           <p className="text-gray-600">
-            {cartItems.length} {cartItems.length === 1 ? 'course' : 'courses'} in your cart
+            {cartItems.length} {cartItems.length === 1 ? "course" : "courses"}{" "}
+            in your cart
           </p>
         </div>
 
@@ -136,7 +138,9 @@ export default function CartPage() {
           <Card>
             <CardContent className="text-center py-12">
               <ShoppingCart className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Your cart is empty
+              </h3>
               <p className="text-gray-600 mb-6">
                 Browse our courses and add them to your cart to get started.
               </p>
@@ -162,12 +166,12 @@ export default function CartPage() {
                           />
                         )}
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-lg mb-1">
                           {item.courseId.title}
                         </h3>
-                        
+
                         <div className="flex items-center space-x-2 text-sm text-gray-600 mb-2">
                           <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
                             {item.courseId.level}
@@ -187,11 +191,12 @@ export default function CartPage() {
                       <div className="text-right flex-shrink-0">
                         <div className="text-lg font-bold text-gray-900 mb-2">
                           ${item.price}
-                          {item.courseId.originalPrice && item.courseId.originalPrice > item.price && (
-                            <span className="text-sm text-gray-500 line-through ml-2">
-                              ${item.courseId.originalPrice}
-                            </span>
-                          )}
+                          {item.courseId.originalPrice &&
+                            item.courseId.originalPrice > item.price && (
+                              <span className="text-sm text-gray-500 line-through ml-2">
+                                ${item.courseId.originalPrice}
+                              </span>
+                            )}
                         </div>
                         <Button
                           variant="ghost"
@@ -219,14 +224,14 @@ export default function CartPage() {
                     <span>Subtotal ({cartItems.length} courses)</span>
                     <span>${totalAmount}</span>
                   </div>
-                  
+
                   <div className="flex justify-between text-sm">
                     <span>Discount</span>
                     <span className="text-green-600">-$0</span>
                   </div>
-                  
+
                   <hr />
-                  
+
                   <div className="flex justify-between font-semibold text-lg">
                     <span>Total</span>
                     <span>${totalAmount}</span>
@@ -238,7 +243,7 @@ export default function CartPage() {
                     className="w-full"
                     size="lg"
                   >
-                    {processingCheckout ? 'Processing...' : 'Complete Purchase'}
+                    {processingCheckout ? "Processing..." : "Complete Purchase"}
                   </Button>
 
                   <div className="text-xs text-gray-500 text-center">

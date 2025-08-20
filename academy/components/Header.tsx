@@ -4,7 +4,7 @@ import React from "react";
 import { Search, Bell, ChevronDown } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import Link from 'next/link';
+import Link from "next/link";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -84,9 +84,7 @@ const Header = () => {
                   </Button>
                 </Link>
                 <Link href="/register">
-                  <Button size="sm">
-                    Sign Up
-                  </Button>
+                  <Button size="sm">Sign Up</Button>
                 </Link>
               </div>
             )}

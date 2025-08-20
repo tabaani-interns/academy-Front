@@ -1,13 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import Link from 'next/link';
-import { Search, Filter, ShoppingCart } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Link from "next/link";
+import { Search, Filter, ShoppingCart } from "lucide-react";
 
 interface Course {
   _id: string;
@@ -45,11 +51,11 @@ export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<Filters>({
-    search: '',
-    category: '',
-    level: '',
-    minPrice: '',
-    maxPrice: '',
+    search: "",
+    category: "",
+    level: "",
+    minPrice: "",
+    maxPrice: "",
   });
   const [cartCount, setCartCount] = useState(0);
 
@@ -73,7 +79,7 @@ export default function CoursesPage() {
         setCourses(data.courses);
       }
     } catch (error) {
-      console.error('Error fetching courses:', error);
+      console.error("Error fetching courses:", error);
     } finally {
       setLoading(false);
     }
@@ -81,73 +87,73 @@ export default function CoursesPage() {
 
   const fetchCartCount = async () => {
     try {
-      const response = await fetch('/api/cart');
+      const response = await fetch("/api/cart");
       if (response.ok) {
         const data = await response.json();
         setCartCount(data.totalItems);
       }
     } catch (error) {
-      console.error('Error fetching cart:', error);
+      console.error("Error fetching cart:", error);
     }
   };
 
   const addToCart = async (courseId: string) => {
     if (!session) {
-      alert('Please sign in to add courses to cart');
+      alert("Please sign in to add courses to cart");
       return;
     }
 
     try {
-      const response = await fetch('/api/cart', {
-        method: 'POST',
+      const response = await fetch("/api/cart", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ courseId }),
       });
 
       if (response.ok) {
         fetchCartCount();
-        alert('Course added to cart!');
+        alert("Course added to cart!");
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to add to cart');
+        alert(error.error || "Failed to add to cart");
       }
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert('Failed to add to cart');
+      console.error("Error adding to cart:", error);
+      alert("Failed to add to cart");
     }
   };
 
   const enrollInCourse = async (courseId: string) => {
     if (!session) {
-      alert('Please sign in to enroll in courses');
+      alert("Please sign in to enroll in courses");
       return;
     }
 
     try {
-      const response = await fetch('/api/enrollments', {
-        method: 'POST',
+      const response = await fetch("/api/enrollments", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ courseId }),
       });
 
       if (response.ok) {
-        alert('Successfully enrolled in course!');
+        alert("Successfully enrolled in course!");
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to enroll');
+        alert(error.error || "Failed to enroll");
       }
     } catch (error) {
-      console.error('Error enrolling:', error);
-      alert('Failed to enroll');
+      console.error("Error enrolling:", error);
+      alert("Failed to enroll");
     }
   };
 
   const handleFilterChange = (key: keyof Filters, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   if (loading) {
@@ -167,11 +173,9 @@ export default function CoursesPage() {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Explore Courses
             </h1>
-            <p className="text-gray-600">
-              {courses.length} courses available
-            </p>
+            <p className="text-gray-600">{courses.length} courses available</p>
           </div>
-          
+
           {session && cartCount > 0 && (
             <Link href="/cart">
               <Button variant="outline" className="relative">
@@ -187,11 +191,26 @@ export default function CoursesPage() {
 
         {/* Filters */}
         <Card className="mb-8">
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="flex items-center">
               <Filter className="h-5 w-5 mr-2" />
               Filters
             </CardTitle>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                setFilters({
+                  search: "",
+                  category: "",
+                  level: "",
+                  minPrice: "",
+                  maxPrice: "",
+                })
+              }
+            >
+              Clear All
+            </Button>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -200,17 +219,19 @@ export default function CoursesPage() {
                 <Input
                   placeholder="Search courses..."
                   value={filters.search}
-                  onChange={(e) => handleFilterChange('search', e.target.value)}
+                  onChange={(e) => handleFilterChange("search", e.target.value)}
                   className="pl-10"
                 />
               </div>
 
-              <Select value={filters.category} onValueChange={(value) => handleFilterChange('category', value)}>
+              <Select
+                value={filters.category}
+                onValueChange={(value) => handleFilterChange("category", value)}
+              >
                 <SelectTrigger>
-                  <SelectValue placeholder="Category" />
+                  <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
                   <SelectItem value="Programming">Programming</SelectItem>
                   <SelectItem value="Design">Design</SelectItem>
                   <SelectItem value="Business">Business</SelectItem>
@@ -219,12 +240,14 @@ export default function CoursesPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={filters.level} onValueChange={(value) => handleFilterChange('level', value)}>
+              <Select
+                value={filters.level}
+                onValueChange={(value) => handleFilterChange("level", value)}
+              >
                 <SelectTrigger>
-                  <SelectValue placeholder="Level" />
+                  <SelectValue placeholder="All Levels" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Levels</SelectItem>
                   <SelectItem value="beginner">Beginner</SelectItem>
                   <SelectItem value="intermediate">Intermediate</SelectItem>
                   <SelectItem value="advanced">Advanced</SelectItem>
@@ -235,14 +258,14 @@ export default function CoursesPage() {
                 placeholder="Min Price"
                 type="number"
                 value={filters.minPrice}
-                onChange={(e) => handleFilterChange('minPrice', e.target.value)}
+                onChange={(e) => handleFilterChange("minPrice", e.target.value)}
               />
 
               <Input
                 placeholder="Max Price"
                 type="number"
                 value={filters.maxPrice}
-                onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
+                onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
               />
             </div>
           </CardContent>
@@ -259,7 +282,10 @@ export default function CoursesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {courses.map((course) => (
-              <Card key={course._id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <Card
+                key={course._id}
+                className="overflow-hidden hover:shadow-lg transition-shadow"
+              >
                 <div className="aspect-video bg-gray-200 overflow-hidden">
                   {course.thumbnail && (
                     <img
@@ -269,14 +295,16 @@ export default function CoursesPage() {
                     />
                   )}
                 </div>
-                
+
                 <CardContent className="p-4">
                   <div className="space-y-3">
                     <div className="flex items-start justify-between">
                       <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                         {course.level}
                       </span>
-                      <span className="text-xs text-gray-500">{course.category}</span>
+                      <span className="text-xs text-gray-500">
+                        {course.category}
+                      </span>
                     </div>
 
                     <h3 className="font-semibold text-lg line-clamp-2">
@@ -289,17 +317,23 @@ export default function CoursesPage() {
 
                     <div className="flex items-center space-x-2">
                       <div className="w-6 h-6 bg-gray-300 rounded-full"></div>
-                      <span className="text-sm text-gray-600">{course.tutorId.name}</span>
+                      <span className="text-sm text-gray-600">
+                        {course.tutorId.name}
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <span>{course.totalLessons} lessons</span>
-                      <span>{Math.floor(course.duration / 60)}h {course.duration % 60}m</span>
+                      <span>
+                        {Math.floor(course.duration / 60)}h{" "}
+                        {course.duration % 60}m
+                      </span>
                     </div>
 
                     <div className="flex items-center space-x-2">
                       <div className="flex text-yellow-400">
-                        {'★'.repeat(Math.floor(course.rating))}{'☆'.repeat(5 - Math.floor(course.rating))}
+                        {"★".repeat(Math.floor(course.rating))}
+                        {"☆".repeat(5 - Math.floor(course.rating))}
                       </div>
                       <span className="text-sm text-gray-600">
                         {course.rating} ({course.reviewCount})
@@ -308,12 +342,15 @@ export default function CoursesPage() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-lg font-bold">${course.price}</span>
-                        {course.originalPrice && course.originalPrice > course.price && (
-                          <span className="text-sm text-gray-500 line-through ml-2">
-                            ${course.originalPrice}
-                          </span>
-                        )}
+                        <span className="text-lg font-bold">
+                          ${course.price}
+                        </span>
+                        {course.originalPrice &&
+                          course.originalPrice > course.price && (
+                            <span className="text-sm text-gray-500 line-through ml-2">
+                              ${course.originalPrice}
+                            </span>
+                          )}
                       </div>
                       <span className="text-xs text-gray-500">
                         {course.enrollmentCount} students
@@ -322,7 +359,7 @@ export default function CoursesPage() {
 
                     <div className="space-y-2">
                       {course.price === 0 ? (
-                        <Button 
+                        <Button
                           onClick={() => enrollInCourse(course._id)}
                           className="w-full"
                         >
@@ -330,14 +367,14 @@ export default function CoursesPage() {
                         </Button>
                       ) : (
                         <>
-                          <Button 
+                          <Button
                             onClick={() => addToCart(course._id)}
-                            variant="outline" 
+                            variant="outline"
                             className="w-full"
                           >
                             Add to Cart
                           </Button>
-                          <Button 
+                          <Button
                             onClick={() => enrollInCourse(course._id)}
                             className="w-full"
                           >
